@@ -86,14 +86,11 @@
             box-shadow: 0 4px 12px rgba(234, 90, 12, 0.4);
         }
 
-        .nav-whatsapp {
-            background: rgba(37, 211, 102, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 0.2px solid rgba(37, 211, 102, 0.3);
-            color: #ffffff !important;
-            padding: 10px 10px;
-            border-radius: 10px;
+        .nav-kontak {
+            background: rgba(186, 152, 2, 0.85);
+            color: #fff !important;
+            padding: 10px 18px;
+            border-radius: 8px;
             margin-left: 10px;
             font-weight: 600;
             font-size: 0.95rem;
@@ -101,26 +98,61 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(37, 211, 102, 0.1);
-            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(44, 82, 130, 0.25);
+            border: 2px solid transparent;
         }
 
-        .nav-whatsapp:hover {
-            background: rgba(37, 211, 102, 0.25);
-            border-color: rgba(37, 211, 102, 0.5);
-            color: #128C7E !important;
+        .nav-kontak:hover {
+            background: #ffffff;
+            color: #988904 !important;
+            border-color: #82682c;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
         }
 
-        .nav-whatsapp i {
-            font-size: 1.1rem;
-            color: #25D366;
-            transition: color 0.3s ease;
+        /* ============================
+           FLOATING WHATSAPP BUTTON
+        ============================ */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
         }
 
-        .nav-whatsapp:hover i {
-            color: #128C7E;
+        .floating-whatsapp-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            animation: floating-pulse 2s ease-in-out infinite;
+        }
+
+        .floating-whatsapp-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .floating-whatsapp-link i {
+            font-size: 2.2rem;
+            color: white;
+        }
+
+        @keyframes floating-pulse {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         /* ============================
@@ -521,51 +553,8 @@
         }
 
         /* ============================
-   FLOATING WHATSAPP BUTTON
-============================ */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-        }
-
-        .floating-whatsapp-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            border-radius: 50%;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            animation: floating-pulse 2s ease-in-out infinite;
-        }
-
-        .floating-whatsapp-link:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
-        }
-
-        .floating-whatsapp-link i {
-            font-size: 2.2rem;
-            color: white;
-        }
-
-        @keyframes floating-pulse {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
+           RESPONSIVE
+        ============================ */
         @media (max-width: 768px) {
             .floating-whatsapp {
                 bottom: 20px;
@@ -580,59 +569,7 @@
             .floating-whatsapp-link i {
                 font-size: 1.8rem;
             }
-        }
 
-        @media (max-width: 480px) {
-            .floating-whatsapp {
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .floating-whatsapp-link {
-                width: 50px;
-                height: 50px;
-            }
-
-            .floating-whatsapp-link i {
-                font-size: 1.6rem;
-            }
-        }
-
-        /* ============================
-   NAV KONTAK (SOFT BLUE)
-   ============================ */
-        .nav-kontak {
-            background: rgba(186, 152, 2, 0.85);
-            /* biru navy kalem */
-            color: #fff !important;
-
-            /* ukuran sama */
-            padding: 10px 18px;
-            border-radius: 8px;
-            margin-left: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(44, 82, 130, 0.25);
-            border: 2px solid transparent;
-        }
-
-        .nav-kontak:hover {
-            background: #ffffff;
-            color: #988904 !important;
-            border-color: #82682c;
-            transform: translateY(-2px);
-        }
-
-        /* ============================
-           RESPONSIVE
-        ============================ */
-        @media (max-width: 768px) {
             .category-header h2 {
                 font-size: 1.5rem;
             }
@@ -669,16 +606,34 @@
                 padding: 1rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .floating-whatsapp {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .floating-whatsapp-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .floating-whatsapp-link i {
+                font-size: 1.6rem;
+            }
+        }
     </style>
 </head>
 
 <body>
+
     <!-- LOADING SCREEN -->
     <div id="loader-wrapper">
         <div class="logo-container">
             <img src="{{ asset('image/Loadinglogo.png') }}" alt="Logo Dana Pensiun" class="pulsing-logo">
         </div>
     </div>
+
     <!-- FLOATING WHATSAPP BUTTON -->
     <div class="floating-whatsapp">
         <a href="https://wa.me/628137964058" target="_blank" class="floating-whatsapp-link" aria-label="WhatsApp">
@@ -701,37 +656,33 @@
                 <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
                 <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
                 <a href="{{ url('/warta') }}" class="nav-link active">Warta</a>
-
-                <!-- MENU KHUSUS -->
                 <a href="{{ route('formulir') }}" class="nav-link nav-download">
                     <i class="fas fa-download"></i> Unduh Formulir
                 </a>
                 <a href="{{ route('Pengaduan') }}" class="nav-link nav-kontak">
                     <i class="fas fa-phone-alt"></i> Bantuan/Kontak
                 </a>
-        </div>>
+            </nav>
 
-        <div class="mobile-nav" id="mobileNav">
-            <a href="{{ url('/') }}" class="nav-link">Beranda</a>
-            <a href="{{ url('/profile') }}" class="nav-link">Profil</a>
-            <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
-            <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
-            <a href="{{ url('/warta') }}" class="nav-link active">Warta</a>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="{{ url('/') }}" class="nav-link">Beranda</a>
+                <a href="{{ url('/profile') }}" class="nav-link">Profil</a>
+                <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
+                <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
+                <a href="{{ url('/warta') }}" class="nav-link active">Warta</a>
+                <a href="{{ route('formulir') }}" class="nav-link nav-download">
+                    <i class="fas fa-download"></i> Unduh Formulir
+                </a>
+                <a href="{{ route('Pengaduan') }}" class="nav-link nav-kontak">
+                    <i class="fas fa-phone-alt"></i> Bantuan/Kontak
+                </a>
+            </div>
 
-            <!-- MENU KHUSUS -->
-            <a href="{{ route('formulir') }}" class="nav-link nav-download">
-                <i class="fas fa-download"></i> Unduh Formulir
-            </a>
-            <a href="{{ route('Pengaduan') }}" class="nav-link nav-kontak">
-                <i class="fas fa-phone-alt"></i> Bantuan/Kontak
-            </a>
-        </div>>
-
-        <div class="header-actions">
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
+            <div class="header-actions">
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -771,6 +722,7 @@
         <!-- Main Content -->
         <section class="quick-links">
             <div class="container">
+
                 <!-- Apresiasi OJK 2023 -->
                 <section class="category-section">
                     <div class="category-header">
@@ -816,8 +768,10 @@
                     </div>
 
                     <div class="slider-description">
-                        <p><i class="fas fa-info-circle"></i> Dana Pensiun dengan Penyampaian Laporan Keuangan
-                            Bulanan Tercepat dan Lengkap</p>
+                        <p>
+                            <i class="fas fa-info-circle"></i>
+                            Dana Pensiun dengan Penyampaian Laporan Keuangan Bulanan Tercepat dan Lengkap
+                        </p>
                     </div>
                 </section>
 
@@ -846,15 +800,11 @@
                                             <div class="pdf-overlay-icon">
                                                 <i class="fas fa-eye"></i>
                                             </div>
-                                            <div class="pdf-overlay-text">
-                                                Klik untuk Lihat & Download
-                                            </div>
+                                            <div class="pdf-overlay-text">Klik untuk Lihat & Download</div>
                                         </div>
                                     </div>
 
-                                    <span class="pdf-badge">
-                                        {{ $warta->kategori }} {{ $warta->tanggal }}
-                                    </span>
+                                    <span class="pdf-badge">{{ $warta->kategori }} {{ $warta->tanggal }}</span>
                                 </div>
 
                                 <div class="pdf-content">
@@ -875,6 +825,7 @@
                         @endforeach
                     </div>
                 </section>
+
             </div>
         </section>
     </div>
@@ -886,8 +837,7 @@
                 <div class="pdf-modal-title" id="pdfTitle">Dokumen PDF</div>
                 <div class="pdf-modal-actions">
                     <button class="pdf-modal-btn" onclick="downloadPDF()">
-                        <i class="fas fa-download"></i>
-                        Download
+                        <i class="fas fa-download"></i> Download
                     </button>
                     <button class="pdf-modal-close" onclick="closePDF()">
                         <i class="fas fa-times"></i>
@@ -963,7 +913,6 @@
                                     class="logo-img bg-white">
                             </a>
                         </div>
-
                         <div class="compliance-item">
                             <p>Terdaftar Sebagai Anggota:</p>
                             <a href="https://www.adpi.or.id" target="_blank" rel="noopener noreferrer">
@@ -985,24 +934,18 @@
         // Loading Screen
         window.addEventListener("load", function() {
             const loader = document.getElementById("loader-wrapper");
-            setTimeout(function() {
-                loader.classList.add("loader-hide");
-            }, 300);
+            setTimeout(() => loader.classList.add("loader-hide"), 300);
         });
 
         // Mobile Menu
         const mobileBtn = document.querySelector(".mobile-menu-btn");
         const mobileNav = document.getElementById("mobileNav");
-
-        mobileBtn.addEventListener("click", () => {
-            mobileNav.classList.toggle("active");
-        });
+        mobileBtn.addEventListener("click", () => mobileNav.classList.toggle("active"));
 
         // Header Scroll
         window.addEventListener('scroll', function() {
             const header = document.getElementById('mainHeader');
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
+            header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
         // Hero Slider
@@ -1011,13 +954,10 @@
         const heroDots = document.querySelectorAll('.hero-slider .dot');
 
         function showSlide(n) {
-            heroSlides.forEach(slide => slide.classList.remove('active'));
-            heroDots.forEach(dot => dot.classList.remove('active'));
+            heroSlides.forEach(s => s.classList.remove('active'));
+            heroDots.forEach(d => d.classList.remove('active'));
 
-            currentHeroSlide = n;
-            if (currentHeroSlide >= heroSlides.length) currentHeroSlide = 0;
-            if (currentHeroSlide < 0) currentHeroSlide = heroSlides.length - 1;
-
+            currentHeroSlide = (n + heroSlides.length) % heroSlides.length;
             heroSlides[currentHeroSlide].classList.add('active');
             heroDots[currentHeroSlide].classList.add('active');
         }
@@ -1026,33 +966,18 @@
             showSlide(n);
         }
 
-        setInterval(() => {
-            currentHeroSlide++;
-            showSlide(currentHeroSlide);
-        }, 5000);
+        setInterval(() => showSlide(currentHeroSlide + 1), 5000);
 
-        // Image Slider (Apresiasi)
+        // Image Slider (Apresiasi OJK)
         let currentIndex = 0;
-        const slides = document.querySelectorAll('.slide-item');
-        const dots = document.querySelectorAll('.image-slider .dot');
+        const slideItems = document.querySelectorAll('.slide-item');
+        const imageDots = document.querySelectorAll('.image-slider .dot');
         let autoSlideInterval;
 
         function showImageSlide(index) {
-            if (index >= slides.length) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = slides.length - 1;
-            } else {
-                currentIndex = index;
-            }
-
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === currentIndex);
-            });
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
+            currentIndex = (index + slideItems.length) % slideItems.length;
+            slideItems.forEach((s, i) => s.classList.toggle('active', i === currentIndex));
+            imageDots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
         }
 
         function moveSlide(direction) {
@@ -1065,13 +990,8 @@
             resetAutoSlide();
         }
 
-        function autoSlide() {
-            currentIndex++;
-            showImageSlide(currentIndex);
-        }
-
         function startAutoSlide() {
-            autoSlideInterval = setInterval(autoSlide, 4000);
+            autoSlideInterval = setInterval(() => showImageSlide(currentIndex + 1), 4000);
         }
 
         function resetAutoSlide() {
@@ -1081,18 +1001,13 @@
 
         startAutoSlide();
 
-        const sliderElement = document.querySelector('.image-slider');
-        if (sliderElement) {
-            sliderElement.addEventListener('mouseenter', () => {
-                clearInterval(autoSlideInterval);
-            });
-
-            sliderElement.addEventListener('mouseleave', () => {
-                startAutoSlide();
-            });
+        const sliderEl = document.querySelector('.image-slider');
+        if (sliderEl) {
+            sliderEl.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            sliderEl.addEventListener('mouseleave', startAutoSlide);
         }
 
-        // PDF Modal Functions
+        // PDF Modal
         let currentPDFUrl = '';
 
         function openPDF(url, title) {
@@ -1116,13 +1031,11 @@
             link.click();
         }
 
-        // Close modal on outside click
         document.getElementById('pdfModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePDF();
-            }
+            if (e.target === this) closePDF();
         });
     </script>
+
 </body>
 
 </html>

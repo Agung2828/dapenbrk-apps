@@ -1188,7 +1188,7 @@
                                 </div>
                                 <h3 class="profile-name">M. Affan</h3>
                                 <p class="profile-position">Anggota Dewan Pengawas</p>
-                                <p class="profile-period">Periode: 2021-2025</p>
+                                <p class="profile-period">Periode: 2025-2029</p>
                                 <div class="profile-info">
                                     <div class="profile-info-item">
                                         <span class="profile-info-label">Status</span>
@@ -1235,12 +1235,12 @@
                         <div class="profile-grid-single">
                             <div class="profile-card">
                                 <div class="profile-avatar">
-                                    <img src="{{ asset('image/Edirison.png') }}" alt="Edirison">
+                                    <i class="fas fa-user"></i>
                                 </div>
-                                <h3 class="profile-name">Edirison</h3>
+                                <h3 class="profile-name"></h3>
                                 <p class="profile-position">Direktur Utama</p>
                                 <div style="margin: 0.5rem 0; font-size: 0.9rem; color: #666; font-style: italic;">
-                                    Merangkap Direktur Kepesertaan & Umum
+
                                 </div>
                             </div>
                         </div>
@@ -1253,8 +1253,9 @@
                                 <div class="profile-avatar">
                                     <img src="{{ asset('image/Edirison.png') }}" alt="Edirison">
                                 </div>
+                                <h3 class="profile-name"></h3>
                                 <h3 class="profile-name">Edirison</h3>
-                                <p class="profile-position">Direktur Kepesertaan & Umum</p>
+                                <p class="profile-position">Direktur Umum</p>
                                 <p class="profile-period">Periode: 2025-2026</p>
                             </div>
 
@@ -1264,7 +1265,7 @@
                                 </div>
                                 <h3 class="profile-name">Yuharman</h3>
                                 <p class="profile-position">Direktur Investasi</p>
-                                <p class="profile-period">Periode: 2021-2025</p>
+                                <p class="profile-period">Periode: 2025-2029</p>
                             </div>
                         </div>
                     </div>

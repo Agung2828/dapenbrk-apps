@@ -75,20 +75,15 @@
    ============================ */
         .nav-pengaduan {
             background: rgba(176, 64, 64, 0.85);
-            /* merah kalem */
             color: #fff !important;
-
-            /* samakan ukuran dgn nav-download */
             padding: 10px 18px;
             border-radius: 8px;
             margin-left: 10px;
             font-weight: 600;
             font-size: 0.95rem;
-
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(176, 64, 64, 0.25);
             border: 2px solid transparent;
@@ -107,20 +102,15 @@
    ============================ */
         .nav-kontak {
             background: rgba(186, 152, 2, 0.85);
-            /* biru navy kalem */
             color: #fff !important;
-
-            /* ukuran sama */
             padding: 10px 18px;
             border-radius: 8px;
             margin-left: 10px;
             font-weight: 600;
             font-size: 0.95rem;
-
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(44, 82, 130, 0.25);
             border: 2px solid transparent;
@@ -207,15 +197,9 @@
             z-index: 1;
         }
 
+        /* Overlay dihapus total - foto asli tampil langsung */
         .slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(231, 161, 9, 0.541) 0%, rgba(30, 58, 95, 0.85) 100%);
-            z-index: 1;
+            display: none;
         }
 
         .slide.active {
@@ -239,7 +223,7 @@
             font-weight: 800;
             margin-bottom: 1.5rem;
             line-height: 1.2;
-            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
         }
 
         .slide-content p {
@@ -247,7 +231,7 @@
             line-height: 1.8;
             max-width: 800px;
             margin: 0 auto 2rem;
-            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes slideInUp {
@@ -556,7 +540,6 @@
            RESPONSIVE DESIGN - MOBILE & TABLET
         ============================ */
 
-        /* Tablet & Medium Screens */
         @media (max-width: 1200px) {
 
             .nav-download,
@@ -566,7 +549,6 @@
             }
         }
 
-        /* Mobile Landscape & Small Tablets */
         @media (max-width: 991px) {
 
             .main-nav .nav-download,
@@ -576,10 +558,7 @@
             }
         }
 
-        /* Mobile Portrait */
         @media (max-width: 768px) {
-
-            /* Floating WhatsApp Button Mobile */
             .floating-whatsapp {
                 bottom: 20px;
                 right: 20px;
@@ -594,10 +573,8 @@
                 font-size: 1.8rem;
             }
 
-            /* Hero Slider Mobile */
             .slide-content {
                 margin-bottom: 500px;
-                /* Increase to accommodate quick links */
                 padding: 0 1.5rem;
             }
 
@@ -609,16 +586,13 @@
                 font-size: 1rem;
             }
 
-            /* Quick Links Mobile */
             .quick-links-slider {
                 bottom: 20px;
-                /* Move closer to bottom */
             }
 
             .quick-links-grid-slider {
                 flex-direction: column;
                 gap: 0.8rem;
-                /* Reduce gap between items */
                 max-width: 100%;
                 padding: 0 1rem;
             }
@@ -626,12 +600,10 @@
             .quick-link-item-slider {
                 width: 100%;
                 padding: 1.2rem 1rem;
-                /* Reduce padding */
             }
 
             .quick-link-item-slider i {
                 font-size: 2rem;
-                /* Slightly smaller icon */
                 margin-bottom: 0.8rem;
             }
 
@@ -639,10 +611,8 @@
                 font-size: 0.9rem;
             }
 
-            /* Slider Navigation Mobile */
             .slider-dots {
                 bottom: 550px;
-                /* Adjust dots position */
             }
 
             .slider-arrow {
@@ -658,19 +628,8 @@
             .slider-arrow.next {
                 right: 15px;
             }
-
-            /* Mobile Nav Buttons */
-            /* .mobile-nav .nav-download,
-            .mobile-nav .nav-whatsapp,
-            .mobile-nav .nav-kontak {
-                width: 100%;
-                justify-content: center;
-                margin: 8px 0;
-                padding: 12px 20px;
-            } */
         }
 
-        /* Small Mobile */
         @media (max-width: 480px) {
             .slide-content h1 {
                 font-size: 1.6rem;
@@ -682,12 +641,10 @@
 
             .slide-content {
                 margin-bottom: 530px;
-                /* Further increase for smaller screens */
             }
 
             .slider-dots {
                 bottom: 580px;
-                /* Adjust accordingly */
             }
 
             .quick-links-slider {
@@ -720,7 +677,6 @@
             .floating-whatsapp-link i {
                 font-size: 1.6rem;
             }
-
         }
     </style>
 </head>
