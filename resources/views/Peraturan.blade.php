@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peraturan & Dokumen - Dana Pensiun Bank Riau Kepri</title>
-    <link rel="icon" type="image/png" href="{{ asset('image/Loadinglogo.png') }}">
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="{{ asset('image/logodapenbrk.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
@@ -1427,16 +1428,7 @@
                 <section class="document-intro">
                     <div class="document-intro-box">
                         <h2>Peraturan & Dokumen Dana Pensiun</h2>
-                        <p>
-                            Halaman ini memuat peraturan, pedoman, prosedur standar operasional, serta
-                            daftar penerima manfaat pensiun Dana Pensiun Bank Riau Kepri.
-                        </p>
 
-                        <div class="document-category">
-                            <span><i class="fas fa-file-pdf"></i> Peraturan Dana Pensiun</span>
-                            <span><i class="fas fa-book"></i> Pedoman</span>
-                            <span><i class="fas fa-clipboard-list"></i> PSO</span>
-                        </div>
                     </div>
                 </section>
 

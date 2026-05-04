@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi Manfaat Pensiun - Dana Pensiun Bank Riau Kepri</title>
-
-    <link rel="icon" type="image/png" href="{{ asset('image/Loadinglogo.png') }}">
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="{{ asset('image/logodapenbrk.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
@@ -22,6 +22,25 @@
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+        }
+
+        /* ============================
+           FIX: WARNA MENU PUTIH
+        ============================ */
+        .main-nav .nav-link {
+            color: #ffffff !important;
+        }
+
+        .mobile-nav .nav-link {
+            color: #ffffff !important;
+        }
+
+        .main-nav .nav-link:hover {
+            color: #fbbf24 !important;
+        }
+
+        .mobile-nav .nav-link:hover {
+            color: #fbbf24 !important;
         }
 
         /* LOADING */
@@ -331,7 +350,7 @@
         }
 
         /* ============================
-           LAYOUT ROWS (persis seperti gambar)
+           LAYOUT ROWS
         ============================ */
 
         /* Row 1: NIK (lebar) | Tanggal Lahir */
@@ -427,7 +446,7 @@
         }
 
         /* ============================
-           BUTTONS (full width, stacked)
+           BUTTONS
         ============================ */
         .btn-full {
             width: 100%;
@@ -1027,16 +1046,13 @@
 
             /* -----------------------------------------------
                AUTO-FORMAT PhDP SAAT MENGETIK MANUAL
-               Contoh: user ketik 1600000 → tampil "Rp 1.600.000"
             ----------------------------------------------- */
             const phdpEl = document.getElementById('phdpDisplay');
 
             phdpEl.addEventListener('input', function() {
-                // Simpan posisi kursor
                 const cursorPos = this.selectionStart;
                 const prevLen = this.value.length;
 
-                // Ambil hanya angka
                 const digits = this.value.replace(/[^0-9]/g, '');
 
                 if (digits === '') {
@@ -1044,24 +1060,20 @@
                     return;
                 }
 
-                // Format dengan titik ribuan, prefix "Rp "
                 const formatted = 'Rp ' + parseInt(digits).toLocaleString('id-ID');
                 this.value = formatted;
 
-                // Sesuaikan posisi kursor agar tidak lompat ke ujung
                 const newLen = this.value.length;
                 const newPos = cursorPos + (newLen - prevLen);
                 this.setSelectionRange(newPos, newPos);
             });
 
-            // Saat fokus: jika isinya "Rp 0" atau kosong, kosongkan agar mudah diketik
             phdpEl.addEventListener('focus', function() {
                 if (parseRupiah(this.value) === 0) {
                     this.value = '';
                 }
             });
 
-            // Saat blur: jika kosong, biarkan kosong (placeholder akan tampil)
             phdpEl.addEventListener('blur', function() {
                 const val = parseRupiah(this.value);
                 if (val > 0) {
@@ -1106,8 +1118,7 @@
             }
 
             /* -----------------------------------------------
-               VERIFIKASI — hanya NIK + tanggal lahir
-               Response: { found, nama, phdp, tanggal_jadi, tanggal_pensiun }
+               VERIFIKASI
             ----------------------------------------------- */
             window.verifyPeserta = async function() {
                 const key = document.getElementById('searchInput').value.trim();
@@ -1134,10 +1145,8 @@
                         return;
                     }
 
-                    // Tampilkan nama
                     setNama(true, data.nama ?? '-');
 
-                    // Isi tiga kolom bawah secara otomatis
                     fillDate('joinDate', 'joinDateDisplay', data.tanggal_jadi);
                     fillDate('retirementDate', 'retirementDateDisplay', data.tanggal_pensiun);
 

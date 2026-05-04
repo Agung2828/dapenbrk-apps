@@ -8,7 +8,7 @@
     <title>Beranda - Dana Pensiun Bank Riau Kepri</title>
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="{{ asset('image/Loadinglogo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('image/logodapenbrk.png') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -1128,13 +1128,13 @@
             section.querySelectorAll(".news-tab").forEach(tab => {
                 tab.addEventListener("click", () => {
                     section.querySelectorAll(".news-tab").forEach(t => t.classList.remove(
-                    "active"));
+                        "active"));
                     tab.classList.add("active");
                     const filter = tab.dataset.filter;
                     document.querySelectorAll(".news-card").forEach(card => {
                         card.classList.remove("hidden");
                         if (filter !== "semua" && !card.classList.contains("tab-" +
-                            filter)) {
+                                filter)) {
                             card.classList.add("hidden");
                         }
                     });

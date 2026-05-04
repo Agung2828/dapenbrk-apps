@@ -10,6 +10,8 @@ return new class extends Migration
     {
         Schema::create('jumlah_pesertas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedTinyInteger('bulan')->default(1);
+            $table->unsignedSmallInteger('tahun')->default(2025);
             $table->integer('peserta_aktif')->default(0);
             $table->integer('pensiun_ditunda')->default(0);
             $table->integer('pensiun_normal')->default(0);

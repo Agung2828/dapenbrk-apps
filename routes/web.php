@@ -168,11 +168,17 @@ Route::middleware('auth')
         Route::get('jumlah-peserta', [JumlahPesertaController::class, 'index'])
             ->name('jumlah-peserta.index');
 
+        Route::post('jumlah-peserta', [JumlahPesertaController::class, 'store'])  // tambah ini
+            ->name('jumlah-peserta.store');
+
         Route::get('jumlah-peserta/{id}/edit', [JumlahPesertaController::class, 'edit'])
             ->name('jumlah-peserta.edit');
 
         Route::put('jumlah-peserta/{id}', [JumlahPesertaController::class, 'update'])
             ->name('jumlah-peserta.update');
+
+        Route::delete('jumlah-peserta/{id}', [JumlahPesertaController::class, 'destroy'])  // tambah ini
+            ->name('jumlah-peserta.destroy');
 
         // Slider
         Route::resource('slider', SliderController::class)
