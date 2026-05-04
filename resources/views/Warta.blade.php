@@ -805,7 +805,7 @@
                                         </div>
                                     </div>
 
-                                    <span class="pdf-badge">{{ $warta->kategori }} {{ $warta->tanggal }}</span>
+                                    {{-- <span class="pdf-badge">{{ $warta->kategori }} {{ $warta->tanggal }}</span> --}}
                                 </div>
 
                                 <div class="pdf-content">

@@ -289,7 +289,6 @@
             max-width: 1100px;
         }
 
-        /* CARD */
         .quick-link-item-slider {
             width: 210px;
             max-width: 100%;
@@ -311,7 +310,6 @@
                 border-color 0.35s ease;
         }
 
-        /* Shimmer sweep on hover */
         .quick-link-item-slider::after {
             content: '';
             position: absolute;
@@ -339,7 +337,6 @@
             left: 130%;
         }
 
-        /* Ikon — lingkaran putih tipis */
         .quick-link-item-slider .ql-icon {
             width: 60px;
             height: 60px;
@@ -369,7 +366,6 @@
             z-index: 1;
         }
 
-        /* Label */
         .quick-link-item-slider .ql-label {
             color: #e8edf5;
             font-size: 0.87rem;
@@ -382,7 +378,6 @@
             z-index: 1;
         }
 
-        /* Garis dekoratif bawah */
         .quick-link-item-slider .ql-line {
             display: block;
             width: 24px;
@@ -467,7 +462,6 @@
             right: 40px;
         }
 
-        /* Curved Bottom */
         .hero-curved-bottom {
             position: absolute;
             bottom: -1px;
@@ -891,9 +885,9 @@
                     Update terbaru seputar Dana Pensiun Bank Riau Kepri
                 </p>
 
+                {{-- TAB: tanpa "Semua Berita", default aktif = Pengumuman --}}
                 <div class="news-tabs">
-                    <button class="news-tab active" data-filter="semua">Semua Berita</button>
-                    <button class="news-tab" data-filter="pengumuman">Pengumuman</button>
+                    <button class="news-tab active" data-filter="pengumuman">Pengumuman</button>
                     <button class="news-tab" data-filter="kegiatan">Kegiatan</button>
                     <button class="news-tab" data-filter="penghargaan">Penghargaan</button>
                 </div>
@@ -1119,11 +1113,18 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Sembunyikan card yang bukan pengumuman saat pertama load
+            document.querySelectorAll('.news-card').forEach(card => {
+                if (!card.classList.contains('tab-pengumuman')) {
+                    card.classList.add('hidden');
+                }
+            });
+
             document.querySelectorAll('.scroll-animate, .news-card, .feature-item')
                 .forEach(el => observer.observe(el));
         });
 
-        // News Filter
+        // News Filter — tanpa "semua", selalu filter by kategori
         document.querySelectorAll(".news-tabs").forEach(section => {
             section.querySelectorAll(".news-tab").forEach(tab => {
                 tab.addEventListener("click", () => {
@@ -1132,9 +1133,9 @@
                     tab.classList.add("active");
                     const filter = tab.dataset.filter;
                     document.querySelectorAll(".news-card").forEach(card => {
-                        card.classList.remove("hidden");
-                        if (filter !== "semua" && !card.classList.contains("tab-" +
-                                filter)) {
+                        if (card.classList.contains("tab-" + filter)) {
+                            card.classList.remove("hidden");
+                        } else {
                             card.classList.add("hidden");
                         }
                     });
