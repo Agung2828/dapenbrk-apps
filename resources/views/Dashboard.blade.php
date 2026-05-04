@@ -887,9 +887,9 @@
 
                 {{-- TAB: tanpa "Semua Berita", default aktif = Pengumuman --}}
                 <div class="news-tabs">
-                    <button class="news-tab active" data-filter="pengumuman">Pengumuman</button>
+                    <button class="news-tab active" data-filter="penghargaan">Penghargaan</button>
+                    <button class="news-tab" data-filter="pengumuman">Pengumuman</button>
                     <button class="news-tab" data-filter="kegiatan">Kegiatan</button>
-                    <button class="news-tab" data-filter="penghargaan">Penghargaan</button>
                 </div>
 
                 <div class="news-grid">
@@ -1113,9 +1113,9 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Sembunyikan card yang bukan pengumuman saat pertama load
+            // Sembunyikan card yang bukan penghargaan saat pertama load
             document.querySelectorAll('.news-card').forEach(card => {
-                if (!card.classList.contains('tab-pengumuman')) {
+                if (!card.classList.contains('tab-penghargaan')) {
                     card.classList.add('hidden');
                 }
             });
@@ -1123,7 +1123,6 @@
             document.querySelectorAll('.scroll-animate, .news-card, .feature-item')
                 .forEach(el => observer.observe(el));
         });
-
         // News Filter — tanpa "semua", selalu filter by kategori
         document.querySelectorAll(".news-tabs").forEach(section => {
             section.querySelectorAll(".news-tab").forEach(tab => {
