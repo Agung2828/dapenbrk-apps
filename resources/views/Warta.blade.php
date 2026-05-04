@@ -723,7 +723,7 @@
         <section class="quick-links">
             <div class="container">
 
-                <!-- Apresiasi OJK 2023 -->
+                {{-- <!-- Apresiasi OJK 2023 -->
                 <section class="category-section">
                     <div class="category-header">
                         <div class="category-icon">
@@ -773,7 +773,7 @@
                             Dana Pensiun dengan Penyampaian Laporan Keuangan Bulanan Tercepat dan Lengkap
                         </p>
                     </div>
-                </section>
+                </section> --}}
 
                 <!-- Majalah Info ADPI -->
                 <section class="category-section">
@@ -781,7 +781,7 @@
                         <div class="category-icon">
                             <i class="fas fa-newspaper"></i>
                         </div>
-                        <h2>Majalah Info ADPI</h2>
+                        <h2>Warta Dapen BRK</h2>
                     </div>
 
                     <div class="warta-grid">

@@ -71,8 +71,8 @@
         }
 
         /* ============================
-   NAV PENGADUAN (SOFT RED)
-   ============================ */
+           NAV BUTTONS
+        ============================ */
         .nav-pengaduan {
             background: rgba(176, 64, 64, 0.85);
             color: #fff !important;
@@ -96,10 +96,6 @@
             transform: translateY(-2px);
         }
 
-
-        /* ============================
-   NAV KONTAK (SOFT BLUE)
-   ============================ */
         .nav-kontak {
             background: rgba(186, 152, 2, 0.85);
             color: #fff !important;
@@ -121,6 +117,31 @@
             color: #988904 !important;
             border-color: #82682c;
             transform: translateY(-2px);
+        }
+
+        .nav-download {
+            background: rgba(234, 90, 12, 0.75);
+            color: #ffffff !important;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-left: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(234, 90, 12, 0.35);
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+
+        .nav-download:hover {
+            background: #ffffff;
+            color: #ea5a0c !important;
+            border-color: #ea5a0c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(234, 90, 12, 0.4);
         }
 
         /* ============================
@@ -170,7 +191,7 @@
         }
 
         /* ============================
-           HERO SLIDER FULL SCREEN - FIXED
+           HERO SLIDER
         ============================ */
         .hero-slider {
             position: relative;
@@ -197,7 +218,6 @@
             z-index: 1;
         }
 
-        /* Overlay dihapus total - foto asli tampil langsung */
         .slide::before {
             display: none;
         }
@@ -247,11 +267,11 @@
         }
 
         /* ============================
-           QUICK LINKS INSIDE SLIDER
+           QUICK LINKS — ABU-ABU GELAP
         ============================ */
         .quick-links-slider {
             position: absolute;
-            bottom: 80px;
+            bottom: 70px;
             left: 0;
             right: 0;
             z-index: 10;
@@ -264,49 +284,125 @@
         .quick-links-grid-slider {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.2rem;
             width: fit-content;
             max-width: 1100px;
         }
 
+        /* CARD */
         .quick-link-item-slider {
-            width: 320px;
+            width: 210px;
             max-width: 100%;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
+            background: rgba(50, 55, 65, 0.78);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1.8rem 1.2rem 1.6rem;
+            border-radius: 14px;
             text-align: center;
             cursor: pointer;
-            transition: transform .4s ease, background .4s ease, border-color .4s ease, box-shadow .4s ease;
-            border: 2px solid rgba(255, 255, 255, .2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, .15);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.45);
+            transition:
+                transform 0.35s cubic-bezier(.2, .8, .2, 1),
+                background 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+        }
+
+        /* Shimmer sweep on hover */
+        .quick-link-item-slider::after {
+            content: '';
+            position: absolute;
+            top: -80%;
+            left: -65%;
+            width: 50%;
+            height: 260%;
+            background: linear-gradient(118deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.07) 50%,
+                    transparent 100%);
+            transform: skewX(-18deg);
+            transition: left 0.6s ease;
+            pointer-events: none;
         }
 
         .quick-link-item-slider:hover {
-            background: rgba(255, 255, 255, .25);
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, .4);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, .25);
+            transform: translateY(-10px) scale(1.04);
+            background: rgba(65, 72, 85, 0.92);
+            border-color: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
         }
 
-        .quick-link-item-slider i {
-            font-size: 3rem;
-            color: #fff;
-            margin-bottom: 1.2rem;
+        .quick-link-item-slider:hover::after {
+            left: 130%;
+        }
+
+        /* Ikon — lingkaran putih tipis */
+        .quick-link-item-slider .ql-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+        }
+
+        .quick-link-item-slider:hover .ql-icon {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .quick-link-item-slider .ql-icon i {
+            font-size: 1.65rem;
+            color: #ffffff;
             display: block;
+            position: relative;
+            z-index: 1;
         }
 
-        .quick-link-item-slider span {
-            color: #fff;
-            font-size: 1.1rem;
+        /* Label */
+        .quick-link-item-slider .ql-label {
+            color: #e8edf5;
+            font-size: 0.87rem;
             font-weight: 600;
             display: block;
-            line-height: 1.4;
+            line-height: 1.45;
+            letter-spacing: 0.2px;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
         }
 
-        /* Slider Navigation */
+        /* Garis dekoratif bawah */
+        .quick-link-item-slider .ql-line {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0.55rem auto 0;
+            border-radius: 2px;
+            transition: width 0.35s ease, background 0.35s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quick-link-item-slider:hover .ql-line {
+            width: 44px;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ============================
+           SLIDER NAVIGATION
+        ============================ */
         .slider-dots {
             position: absolute;
             bottom: 280px;
@@ -371,7 +467,7 @@
             right: 40px;
         }
 
-        /* Curved Bottom - FIXED */
+        /* Curved Bottom */
         .hero-curved-bottom {
             position: absolute;
             bottom: -1px;
@@ -390,35 +486,6 @@
             height: 100px;
             display: block;
         }
-
-        /* ============================
-           NAVIGATION BUTTONS
-        ============================ */
-        .nav-download {
-            background: rgba(234, 90, 12, 0.75);
-            color: #ffffff !important;
-            padding: 10px 18px;
-            border-radius: 8px;
-            margin-left: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(234, 90, 12, 0.35);
-            white-space: nowrap;
-            border: 2px solid transparent;
-        }
-
-        .nav-download:hover {
-            background: #ffffff;
-            color: #ea5a0c !important;
-            border-color: #ea5a0c;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(234, 90, 12, 0.4);
-        }
-
 
         /* ============================
            SCROLL ANIMATIONS
@@ -537,9 +604,8 @@
         }
 
         /* ============================
-           RESPONSIVE DESIGN - MOBILE & TABLET
+           RESPONSIVE
         ============================ */
-
         @media (max-width: 1200px) {
 
             .nav-download,
@@ -602,13 +668,18 @@
                 padding: 1.2rem 1rem;
             }
 
-            .quick-link-item-slider i {
-                font-size: 2rem;
-                margin-bottom: 0.8rem;
+            .quick-link-item-slider .ql-icon {
+                width: 48px;
+                height: 48px;
+                margin-bottom: 0.75rem;
             }
 
-            .quick-link-item-slider span {
-                font-size: 0.9rem;
+            .quick-link-item-slider .ql-icon i {
+                font-size: 1.35rem;
+            }
+
+            .quick-link-item-slider .ql-label {
+                font-size: 0.88rem;
             }
 
             .slider-dots {
@@ -655,15 +726,6 @@
                 padding: 1rem 0.8rem;
             }
 
-            .quick-link-item-slider i {
-                font-size: 1.8rem;
-                margin-bottom: 0.6rem;
-            }
-
-            .quick-link-item-slider span {
-                font-size: 0.85rem;
-            }
-
             .floating-whatsapp {
                 bottom: 15px;
                 right: 15px;
@@ -700,22 +762,18 @@
     <!-- Main Header -->
     <header class="main-header" id="mainHeader">
         <div class="container">
-            <!-- Logo -->
             <div class="logo-section">
                 <a href="{{ url('/') }}" class="logo">
                     <img src="{{ asset('image/logo.png') }}" alt="Logo">
                 </a>
             </div>
 
-            <!-- Main Nav -->
             <nav class="main-nav">
                 <a href="{{ url('/') }}" class="nav-link active">Beranda</a>
                 <a href="{{ url('/profile') }}" class="nav-link">Profil</a>
                 <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
                 <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
                 <a href="{{ url('/warta') }}" class="nav-link">Warta</a>
-
-                <!-- MENU KHUSUS -->
                 <a href="{{ route('formulir') }}" class="nav-link nav-download">
                     <i class="fas fa-download"></i> Unduh Formulir
                 </a>
@@ -724,15 +782,12 @@
                 </a>
             </nav>
 
-            <!-- Mobile Nav -->
             <div class="mobile-nav" id="mobileNav">
                 <a href="{{ url('/') }}" class="nav-link active">Beranda</a>
                 <a href="{{ url('/profile') }}" class="nav-link">Profil</a>
                 <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
                 <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
                 <a href="{{ url('/warta') }}" class="nav-link">Warta</a>
-
-                <!-- MENU KHUSUS -->
                 <a href="{{ route('formulir') }}" class="nav-link nav-download">
                     <i class="fas fa-download"></i> Unduh Formulir
                 </a>
@@ -741,7 +796,6 @@
                 </a>
             </div>
 
-            <!-- Header Actions -->
             <div class="header-actions">
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -752,8 +806,8 @@
 
     <!-- Home Page -->
     <div id="home" class="page-content active">
-        <!-- Hero Slider Full Screen -->
         <div class="hero-slider">
+
             @forelse ($sliders as $i => $slider)
                 <div class="slide {{ $i == 0 ? 'active' : '' }}"
                     style="background-image: url('{{ asset('storage/' . $slider->image) }}');">
@@ -774,23 +828,32 @@
             <!-- Quick Links -->
             <div class="quick-links-slider">
                 <div class="quick-links-grid-slider">
+
                     <div class="quick-link-item-slider" onclick="window.location.href='{{ route('Pengaduan') }}'">
-                        <i class="fas fa-headset"></i>
-                        <span>Bantuan / Kontak Kami</span>
+                        <div class="ql-icon"><i class="fas fa-headset"></i></div>
+                        <span class="ql-label">Bantuan / Kontak Kami</span>
+                        <span class="ql-line"></span>
                     </div>
+
                     <div class="quick-link-item-slider" onclick="window.location.href='{{ route('simulasi') }}'">
-                        <i class="fas fa-calculator"></i>
-                        <span>Simulasi Manfaat Pensiun</span>
+                        <div class="ql-icon"><i class="fas fa-calculator"></i></div>
+                        <span class="ql-label">Simulasi Manfaat Pensiun</span>
+                        <span class="ql-line"></span>
                     </div>
+
                     <div class="quick-link-item-slider" onclick="window.location.href='{{ url('/peraturan') }}'">
-                        <i class="fas fa-file-invoice"></i>
-                        <span>Peraturan</span>
+                        <div class="ql-icon"><i class="fas fa-file-invoice"></i></div>
+                        <span class="ql-label">Peraturan</span>
+                        <span class="ql-line"></span>
                     </div>
+
                     <div class="quick-link-item-slider"
                         onclick="window.location.href='{{ url('/kepesertaan') }}#pengkinian-data'">
-                        <i class="fas fa-user-edit"></i>
-                        <span>Pengkinian Data</span>
+                        <div class="ql-icon"><i class="fas fa-user-edit"></i></div>
+                        <span class="ql-label">Pengkinian Data</span>
+                        <span class="ql-line"></span>
                     </div>
+
                 </div>
             </div>
 
@@ -805,7 +868,8 @@
             <!-- Dots Navigation -->
             <div class="slider-dots">
                 @foreach ($sliders as $i => $slider)
-                    <span class="dot {{ $i == 0 ? 'active' : '' }}" onclick="changeSlide({{ $i }})"></span>
+                    <span class="dot {{ $i == 0 ? 'active' : '' }}"
+                        onclick="changeSlide({{ $i }})"></span>
                 @endforeach
             </div>
 
@@ -823,8 +887,9 @@
             <!-- News Section -->
             <section class="news-section" id="news-preview">
                 <h2 class="section-title scroll-animate">Berita & Informasi Terkini</h2>
-                <p class="section-subtitle scroll-animate" style="transition-delay: 0.1s;">Update terbaru seputar Dana
-                    Pensiun Bank Riau Kepri</p>
+                <p class="section-subtitle scroll-animate" style="transition-delay: 0.1s;">
+                    Update terbaru seputar Dana Pensiun Bank Riau Kepri
+                </p>
 
                 <div class="news-tabs">
                     <button class="news-tab active" data-filter="semua">Semua Berita</button>
@@ -841,26 +906,22 @@
                                 @php
                                     $fotoName = $item->foto ? basename(str_replace('\\', '/', $item->foto)) : null;
                                 @endphp
-
                                 @if ($fotoName)
                                     <img src="{{ asset('uploads/berita/' . rawurlencode($fotoName)) }}"
                                         alt="Foto Berita">
                                 @else
                                     <img src="{{ asset('image/default.jpg') }}" alt="Foto Default">
                                 @endif
-
                                 <div class="news-date-badge">
                                     {{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
                                 </div>
                             </div>
-
                             <div class="news-content">
                                 <div class="news-category">{{ strtoupper($item->kategori) }}</div>
                                 <h3 class="news-title">{{ $item->judul }}</h3>
                                 <p class="news-excerpt">
                                     {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
                                 </p>
-
                                 <a href="{{ route('berita.detail', $item->id) }}" class="read-more"
                                     onclick="event.stopPropagation();">
                                     Baca Selengkapnya <i class="fas fa-arrow-right"></i>
@@ -876,8 +937,9 @@
             <!-- Why Choose Section -->
             <section class="why-choose">
                 <div class="container">
-                    <h2 class="section-title scroll-animate" style="text-align: center;">Mengapa Memilih Dana Pensiun
-                        Bank Riau Kepri</h2>
+                    <h2 class="section-title scroll-animate" style="text-align: center;">
+                        Mengapa Memilih Dana Pensiun Bank Riau Kepri
+                    </h2>
                     <p class="section-subtitle scroll-animate" style="text-align: center; transition-delay: 0.1s;">
                         Melayani lebih dari 25 tahun, Dana Pensiun Bank Riau Kepri senantiasa memberikan kemudahan dan
                         kecepatan dalam merespon berbagai kebutuhan peserta dengan didukung oleh layanan yang prima
@@ -890,34 +952,29 @@
                             <p class="feature-desc">Diawasi OJK dengan sistem keamanan berlapis untuk melindungi dana
                                 Anda</p>
                         </div>
-
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
                             <h3 class="feature-title">Pengelolaan Profesional</h3>
                             <p class="feature-desc">Tim ahli yang kompeten dan berpengalaman dalam mengelola dana
                                 pensiun</p>
                         </div>
-
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-users"></i></div>
                             <h3 class="feature-title">Layanan Prima</h3>
                             <p class="feature-desc">Pelayanan terbaik untuk memenuhi kebutuhan peserta dengan responsif
                             </p>
                         </div>
-
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
                             <h3 class="feature-title">Investasi Optimal</h3>
                             <p class="feature-desc">Pengelolaan investasi yang optimal untuk hasil maksimal dan
                                 berkelanjutan</p>
                         </div>
-
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-balance-scale"></i></div>
                             <h3 class="feature-title">Tata Kelola Baik</h3>
                             <p class="feature-desc">Menerapkan prinsip tata kelola yang baik dan transparan</p>
                         </div>
-
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
                             <h3 class="feature-title">Terus Berinovasi</h3>
@@ -984,7 +1041,6 @@
                             <span>dapenbankriau@gmail.com</span>
                         </li>
                     </ul>
-
                     <div class="compliance-group">
                         <div class="compliance-item">
                             <p>Terdaftar dan Diawasi Oleh:</p>
@@ -993,7 +1049,6 @@
                                     class="logo-img bg-white">
                             </a>
                         </div>
-
                         <div class="compliance-item">
                             <p>Terdaftar Sebagai Anggota:</p>
                             <a href="https://www.adpi.or.id" target="_blank" rel="noopener noreferrer">
@@ -1014,42 +1069,30 @@
     <script>
         // Loading Screen
         window.addEventListener("load", function() {
-            const loader = document.getElementById("loader-wrapper");
-            setTimeout(function() {
-                loader.classList.add("loader-hide");
-            }, 300);
+            setTimeout(() => document.getElementById("loader-wrapper").classList.add("loader-hide"), 300);
         });
 
         // Mobile Menu
-        const mobileBtn = document.querySelector(".mobile-menu-btn");
-        const mobileNav = document.getElementById("mobileNav");
-
-        mobileBtn.addEventListener("click", () => {
-            mobileNav.classList.toggle("active");
+        document.querySelector(".mobile-menu-btn").addEventListener("click", () => {
+            document.getElementById("mobileNav").classList.toggle("active");
         });
 
         // Header Scroll
         window.addEventListener('scroll', function() {
-            const header = document.getElementById('mainHeader');
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
+            document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Slider Script
+        // Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
 
         function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-
-            currentSlide = n;
-            if (currentSlide >= slides.length) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = slides.length - 1;
-
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
         }
 
         function changeSlide(n) {
@@ -1063,46 +1106,35 @@
         function prevSlide() {
             showSlide(currentSlide - 1);
         }
-
-        setInterval(() => {
-            currentSlide++;
-            showSlide(currentSlide);
-        }, 5000);
+        setInterval(() => showSlide(currentSlide + 1), 5000);
 
         // Scroll Animations
-        const observerOptions = {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('animated');
+            });
+        }, {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                }
-            });
-        }, observerOptions);
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll('.scroll-animate, .news-card, .feature-item');
-            animatedElements.forEach(el => observer.observe(el));
+            document.querySelectorAll('.scroll-animate, .news-card, .feature-item')
+                .forEach(el => observer.observe(el));
         });
 
         // News Filter
         document.querySelectorAll(".news-tabs").forEach(section => {
-            const tabs = section.querySelectorAll(".news-tab");
-            const cards = document.querySelectorAll(".news-card");
-
-            tabs.forEach(tab => {
+            section.querySelectorAll(".news-tab").forEach(tab => {
                 tab.addEventListener("click", () => {
-                    tabs.forEach(t => t.classList.remove("active"));
+                    section.querySelectorAll(".news-tab").forEach(t => t.classList.remove(
+                    "active"));
                     tab.classList.add("active");
-
                     const filter = tab.dataset.filter;
-                    cards.forEach(card => {
+                    document.querySelectorAll(".news-card").forEach(card => {
                         card.classList.remove("hidden");
                         if (filter !== "semua" && !card.classList.contains("tab-" +
-                                filter)) {
+                            filter)) {
                             card.classList.add("hidden");
                         }
                     });

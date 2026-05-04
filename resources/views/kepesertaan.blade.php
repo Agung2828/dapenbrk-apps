@@ -13,8 +13,8 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <style>
             /* ============================
-                                                                                                                                                                                                                       BASE STYLES
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           BASE STYLES
+                                                                                                                                                                                                                        ============================ */
             * {
                 margin: 0;
                 padding: 0;
@@ -29,8 +29,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       LOADING SCREEN
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           LOADING SCREEN
+                                                                                                                                                                                                                        ============================ */
             #loader-wrapper {
                 position: fixed;
                 top: 0;
@@ -68,8 +68,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       NAVIGATION BUTTONS
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           NAVIGATION BUTTONS
+                                                                                                                                                                                                                        ============================ */
             .nav-download {
                 background: rgba(234, 90, 12, 0.75);
                 color: #ffffff !important;
@@ -96,8 +96,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       HERO SECTION
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           HERO SECTION
+                                                                                                                                                                                                                        ============================ */
             .hero-section {
                 background-color: #2a5298;
                 background-image: url('{{ asset('image/Istana Siak.PNG') }}');
@@ -142,8 +142,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       CONTAINER
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           CONTAINER
+                                                                                                                                                                                                                        ============================ */
             .container {
                 max-width: 1200px;
                 margin: 0 auto;
@@ -151,8 +151,8 @@
             }
 
             /* ============================
-                                       FLOATING WHATSAPP BUTTON
-                                    ============================ */
+                                           FLOATING WHATSAPP BUTTON
+                                        ============================ */
             .floating-whatsapp {
                 position: fixed;
                 bottom: 30px;
@@ -229,8 +229,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       STATS SECTION (GLASS EFFECT)
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           STATS SECTION (GLASS EFFECT)
+                                                                                                                                                                                                                        ============================ */
             .stats-section {
                 background: rgba(255, 255, 255, 0.25);
                 backdrop-filter: blur(20px);
@@ -436,8 +436,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       SECTION
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           SECTION
+                                                                                                                                                                                                                        ============================ */
             .section {
                 background: white;
                 margin: 40px auto;
@@ -463,8 +463,8 @@
             }
 
             /* ============================
-                                                                       SECTION WRAPPER
-                                                                    ============================ */
+                                                                           SECTION WRAPPER
+                                                                        ============================ */
             .section {
                 background: #ffffff;
                 padding: 40px 32px;
@@ -487,8 +487,8 @@
             }
 
             /* ============================
-                                                                       TABS (SEDERET, RAPI)
-                                                                    ============================ */
+                                                                           TABS (SEDERET, RAPI)
+                                                                        ============================ */
             .tabs {
                 display: flex;
                 flex-wrap: nowrap;
@@ -528,9 +528,9 @@
             }
 
             /* ============================
-                                                                       TAB CONTENT
-                                                                       (JS LOGIC AMAN)
-                                                                    ============================ */
+                                                                           TAB CONTENT
+                                                                           (JS LOGIC AMAN)
+                                                                        ============================ */
             .tab-contents {
                 width: 100%;
             }
@@ -545,8 +545,8 @@
             }
 
             /* ============================
-                                                                       ANIMATION
-                                                                    ============================ */
+                                                                           ANIMATION
+                                                                        ============================ */
             @keyframes fadeIn {
                 from {
                     opacity: 0;
@@ -561,8 +561,8 @@
 
 
             /* ===============================
-                                                                                                           PROGRAM PENSIUN – CLEAN & RAPI
-                                                                                                        ================================ */
+                                                                                                               PROGRAM PENSIUN – CLEAN & RAPI
+                                                                                                            ================================ */
 
             /* Grid utama */
             #program .card-grid {
@@ -691,8 +691,8 @@
             }
 
             /* ===============================
-                                                                                                           RESPONSIVE
-                                                                                                        ================================ */
+                                                                                                               RESPONSIVE
+                                                                                                            ================================ */
             @media (max-width: 768px) {
                 #program .card-grid {
                     grid-template-columns: 1fr;
@@ -704,8 +704,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       INFO CARD & CARD GRID
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           INFO CARD & CARD GRID
+                                                                                                                                                                                                                        ============================ */
             .card-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -760,8 +760,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       CUSTOM LIST
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           CUSTOM LIST
+                                                                                                                                                                                                                        ============================ */
             .custom-list {
                 list-style: none;
                 padding: 0;
@@ -789,8 +789,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       FORMULA BOX
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           FORMULA BOX
+                                                                                                                                                                                                                        ============================ */
             .formula-box {
                 background: #fef3c7;
                 padding: 14px;
@@ -810,8 +810,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       PENGKINIAN DATA
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           PENGKINIAN DATA
+                                                                                                                                                                                                                        ============================ */
             .pengkinian-greeting h3 {
                 font-weight: 600;
                 color: #1e3c72;
@@ -883,8 +883,8 @@
             }
 
             /* ============================
-                   NAV KONTAK (SOFT BLUE)
-                   ============================ */
+                       NAV KONTAK (SOFT BLUE)
+                       ============================ */
             .nav-kontak {
                 background: rgba(186, 152, 2, 0.85);
                 /* biru navy kalem */
@@ -914,8 +914,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       BUTTON
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           BUTTON
+                                                                                                                                                                                                                        ============================ */
             .btn {
                 display: inline-block;
                 padding: 12px 30px;
@@ -939,8 +939,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       NUMBERED LIST
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           NUMBERED LIST
+                                                                                                                                                                                                                        ============================ */
             .numbered-list {
                 padding-left: 20px;
             }
@@ -951,8 +951,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       COMPLAINT PAGE
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           COMPLAINT PAGE
+                                                                                                                                                                                                                        ============================ */
             .complaint-page {
                 padding: 20px 0;
             }
@@ -1018,8 +1018,8 @@
             }
 
             /* ============================
-                                                       MATERI SOSIALISASI STYLES
-                                                    ============================ */
+                                                           MATERI SOSIALISASI STYLES
+                                                        ============================ */
 
             /* ===== UTIL ===== */
             .d-flex {
@@ -1227,8 +1227,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       PDF MODAL STYLES
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           PDF MODAL STYLES
+                                                                                                                                                                                                                        ============================ */
             .pdf-modal {
                 display: none;
                 position: fixed;
@@ -1368,8 +1368,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                               FLOWCHART SYARAT PEMBAYARAN
-                                                                                                                                                                                            ============================ */
+                                                                                                                                                                                                   FLOWCHART SYARAT PEMBAYARAN
+                                                                                                                                                                                                ============================ */
             .flowchart-syarat-container {
                 background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
                 padding: 50px 30px;
@@ -1513,14 +1513,14 @@
             }
 
             /* .flowchart-oval-content span::before {
-                                                                                                                                                                            content: '\f00c';
-                                                                                                                                                                            font-family: 'Font Awesome 6 Free';
-                                                                                                                                                                            font-weight: 900;
-                                                                                                                                                                            position: absolute;
-                                                                                                                                                                            left: 0;
-                                                                                                                                                                            color: #fbbf24;
-                                                                                                                                                                            font-size: 12px;
-                                                                                                                                                                        } */
+                                                                                                                                                                                content: '\f00c';
+                                                                                                                                                                                font-family: 'Font Awesome 6 Free';
+                                                                                                                                                                                font-weight: 900;
+                                                                                                                                                                                position: absolute;
+                                                                                                                                                                                left: 0;
+                                                                                                                                                                                color: #fbbf24;
+                                                                                                                                                                                font-size: 12px;
+                                                                                                                                                                            } */
 
             .flowchart-line {
                 width: 60px;
@@ -1612,8 +1612,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                               RESPONSIVE DESIGN
-                                                                                                                                                                                            ============================ */
+                                                                                                                                                                                                   RESPONSIVE DESIGN
+                                                                                                                                                                                                ============================ */
             @media (max-width: 1024px) {
                 .flowchart-oval {
                     width: 240px;
@@ -1703,8 +1703,8 @@
             }
 
             /* ============================
-                                                                                                                                                                                                                       RESPONSIVE DESIGN
-                                                                                                                                                                                                                    ============================ */
+                                                                                                                                                                                                                           RESPONSIVE DESIGN
+                                                                                                                                                                                                                        ============================ */
             @media (max-width: 1024px) {
                 .data-stats-grid {
                     grid-template-columns: repeat(3, 1fr);
@@ -1945,7 +1945,7 @@
             <div class="stats-section">
                 <div class="stats-header">
                     <h2>Jumlah Peserta</h2>
-                    <p class="stats-date">Data per {{ now()->format('d F Y') }}</p>
+                    <p class="stats-date">Data per {{ now()->format('F Y') }}</p>
                 </div>
 
                 <div class="data-stats-grid">

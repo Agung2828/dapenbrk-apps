@@ -1203,6 +1203,14 @@
                     years--;
                     months += 12;
                 }
+
+                // Masa kerja maksimal 32 tahun
+                const MAX_YEARS = 32;
+                if (years > MAX_YEARS || (years === MAX_YEARS && months > 0)) {
+                    years = MAX_YEARS;
+                    months = 0;
+                }
+
                 const decimal = (years + months / 12).toFixed(2);
                 document.getElementById('masaKerjaDisplay').innerText = `${years} Tahun ${months} Bulan`;
                 document.getElementById('tahunDetail').innerText = years;
@@ -1215,7 +1223,7 @@
                 if (manfaat < 1000000) manfaat = 1000000;
                 document.getElementById('resultValue').innerText = formatRupiah(Math.round(manfaat));
                 document.getElementById('formulaDetail').innerText =
-                `2,5% × ${decimal} × ${formatRupiah(phdp)}`;
+                    `2,5% × ${decimal} × ${formatRupiah(phdp)}`;
                 document.getElementById('resultBox').style.display = 'block';
             };
 

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
         /* ============================
-           LOADING SCREEN STYLES (VERSI TRANSPARAN)
+           LOADING SCREEN STYLES
         ============================ */
         #loader-wrapper {
             position: fixed;
@@ -36,7 +36,174 @@
             display: none !important;
         }
 
-        /* ================= HERO VIDEO - FIXED ================= */
+        .logo-container {
+            position: relative;
+            margin: 0;
+        }
+
+        .pulsing-logo {
+            width: 100px;
+            object-fit: contain;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        #loader-wrapper.loader-hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ============================
+           NAV BUTTONS
+        ============================ */
+        .nav-kontak {
+            background: rgba(186, 152, 2, 0.85);
+            color: #fff !important;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-left: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(44, 82, 130, 0.25);
+            border: 2px solid transparent;
+        }
+
+        .nav-kontak:hover {
+            background: #ffffff;
+            color: #988904 !important;
+            border-color: #82682c;
+            transform: translateY(-2px);
+        }
+
+        .nav-download {
+            background: rgba(234, 90, 12, 0.75);
+            color: #ffffff !important;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-left: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(234, 90, 12, 0.35);
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+
+        .nav-download:hover {
+            background: #ffffff;
+            color: #ea5a0c !important;
+            border-color: #ea5a0c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(234, 90, 12, 0.4);
+        }
+
+        @media (max-width: 991px) {
+
+            .main-nav .nav-download,
+            .main-nav .nav-kontak {
+                display: none;
+            }
+        }
+
+        /* ============================
+           FLOATING WHATSAPP BUTTON
+        ============================ */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .floating-whatsapp-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            animation: floating-pulse 2s ease-in-out infinite;
+        }
+
+        .floating-whatsapp-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .floating-whatsapp-link i {
+            font-size: 2.2rem;
+            color: white;
+        }
+
+        @keyframes floating-pulse {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-whatsapp {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .floating-whatsapp-link {
+                width: 52px;
+                height: 52px;
+            }
+
+            .floating-whatsapp-link i {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-whatsapp {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .floating-whatsapp-link {
+                width: 48px;
+                height: 48px;
+            }
+
+            .floating-whatsapp-link i {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ============================
+           HERO VIDEO
+        ============================ */
         .hero-video {
             position: relative;
             width: 100%;
@@ -378,102 +545,6 @@
             top: 1rem;
         }
 
-        /* ============================
-   NAV KONTAK (SOFT BLUE)
-   ============================ */
-        .nav-kontak {
-            background: rgba(186, 152, 2, 0.85);
-            /* biru navy kalem */
-            color: #fff !important;
-
-            /* ukuran sama */
-            padding: 10px 18px;
-            border-radius: 8px;
-            margin-left: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(44, 82, 130, 0.25);
-            border: 2px solid transparent;
-        }
-
-        .nav-kontak:hover {
-            background: #ffffff;
-            color: #988904 !important;
-            border-color: #82682c;
-            transform: translateY(-2px);
-        }
-
-        /* ============================
-           NAVIGATION BUTTONS
-        ============================ */
-        .nav-download {
-            background: rgba(234, 90, 12, 0.75);
-            color: #ffffff !important;
-            padding: 10px 18px;
-            border-radius: 8px;
-            margin-left: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(234, 90, 12, 0.35);
-            white-space: nowrap;
-            border: 2px solid transparent;
-        }
-
-        .nav-download:hover {
-            background: #ffffff;
-            color: #ea5a0c !important;
-            border-color: #ea5a0c;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(234, 90, 12, 0.4);
-        }
-
-        .nav-whatsapp {
-            background: rgba(37, 211, 102, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 0.2px solid rgba(37, 211, 102, 0.3);
-            color: #ffffff !important;
-            padding: 10px 10px;
-            border-radius: 10px;
-            margin-left: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(37, 211, 102, 0.1);
-            white-space: nowrap;
-        }
-
-        .nav-whatsapp:hover {
-            background: rgba(37, 211, 102, 0.25);
-            border-color: rgba(37, 211, 102, 0.5);
-            color: #128C7E !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
-        }
-
-        .nav-whatsapp i {
-            font-size: 1.1rem;
-            color: #25D366;
-            transition: color 0.3s ease;
-        }
-
-        .nav-whatsapp:hover i {
-            color: #128C7E;
-        }
-
         /* Profile Cards */
         .profile-grid {
             display: grid;
@@ -482,7 +553,6 @@
             margin-top: 3rem;
         }
 
-        /* Layout untuk 4 cards berdampingan (untuk tab Kepala Departemen) */
         #kepala-dept .profile-grid {
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
@@ -491,7 +561,6 @@
             margin-right: auto;
         }
 
-        /* NEW: Layout untuk 1 card di tengah (Ketua) */
         .profile-grid-single {
             display: flex;
             justify-content: center;
@@ -504,7 +573,6 @@
             width: 100%;
         }
 
-        /* NEW: Layout untuk 3 cards (Anggota) */
         .profile-grid-two {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -515,7 +583,6 @@
             margin-right: auto;
         }
 
-        /* Layout untuk 2 cards berdampingan (untuk tab Pengurus) */
         #pengurus .profile-grid-two {
             grid-template-columns: repeat(2, 1fr);
             max-width: 900px;
@@ -616,84 +683,6 @@
             font-weight: 600;
         }
 
-        /* ============================
-   FLOATING WHATSAPP BUTTON
-============================ */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-        }
-
-        .floating-whatsapp-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            border-radius: 50%;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            animation: floating-pulse 2s ease-in-out infinite;
-        }
-
-        .floating-whatsapp-link:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
-        }
-
-        .floating-whatsapp-link i {
-            font-size: 2.2rem;
-            color: white;
-        }
-
-        @keyframes floating-pulse {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .floating-whatsapp {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .floating-whatsapp-link {
-                width: 55px;
-                height: 55px;
-            }
-
-            .floating-whatsapp-link i {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .floating-whatsapp {
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .floating-whatsapp-link {
-                width: 50px;
-                height: 50px;
-            }
-
-            .floating-whatsapp-link i {
-                font-size: 1.6rem;
-            }
-        }
-
         /* Struktur Organisasi */
         .struktur-container {
             background: white;
@@ -781,7 +770,9 @@
             background: #f8fafc;
         }
 
-        /* Responsive */
+        /* ============================
+           RESPONSIVE
+        ============================ */
         @media (max-width: 768px) {
             .hero-video {
                 height: 70vh;
@@ -848,36 +839,23 @@
             }
         }
 
-        /* Responsive untuk tablet */
         @media (min-width: 769px) and (max-width: 1024px) {
             #kepala-dept .profile-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
-        .nav-download {
-            background: #f36c12;
-            color: #fff !important;
-            padding: 8px 14px;
-            border-radius: 6px;
-            margin-left: 10px;
-            font-weight: 600;
-        }
-
-        .nav-download:hover {
-            background: #d68910;
-            color: #f70707 !important;
-        }
     </style>
 </head>
 
 <body>
+
     <!-- LOADING SCREEN -->
     <div id="loader-wrapper">
         <div class="logo-container">
             <img src="{{ asset('image/Loadinglogo.png') }}" alt="Logo Dana Pensiun" class="pulsing-logo">
         </div>
     </div>
+
     <!-- FLOATING WHATSAPP BUTTON -->
     <div class="floating-whatsapp">
         <a href="https://wa.me/628137964058" target="_blank" class="floating-whatsapp-link" aria-label="WhatsApp">
@@ -885,18 +863,12 @@
         </a>
     </div>
 
-    <script>
-        window.addEventListener("load", function() {
-            const loader = document.getElementById("loader-wrapper");
-            setTimeout(function() {
-                loader.classList.add("loader-hide");
-            }, 300);
-        });
-    </script>
-
-    <!-- Main Header -->
+    <!-- =============================================
+         MAIN HEADER — struktur SAMA PERSIS dengan beranda
+    ============================================== -->
     <header class="main-header" id="mainHeader">
         <div class="container">
+
             <!-- Logo -->
             <div class="logo-section">
                 <a href="{{ url('/') }}" class="logo">
@@ -904,68 +876,52 @@
                 </a>
             </div>
 
-            <!-- Main Nav -->
+            <!-- Main Nav (Desktop) -->
             <nav class="main-nav">
                 <a href="{{ url('/') }}" class="nav-link">Beranda</a>
                 <a href="{{ url('/profile') }}" class="nav-link active">Profil</a>
                 <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
                 <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
                 <a href="{{ url('/warta') }}" class="nav-link">Warta</a>
-                <!-- MENU KHUSUS -->
                 <a href="{{ route('formulir') }}" class="nav-link nav-download">
                     <i class="fas fa-download"></i> Unduh Formulir
                 </a>
                 <a href="{{ route('Pengaduan') }}" class="nav-link nav-kontak">
                     <i class="fas fa-phone-alt"></i> Bantuan/Kontak
                 </a>
-        </div>
-        <!-- Mobile Nav -->
-        <div class="mobile-nav" id="mobileNav">
-            <a href="{{ url('/') }}" class="nav-link">Beranda</a>
-            <a href="{{ url('/profile') }}" class="nav-link active">Profil</a>
-            <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
-            <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
-            <a href="{{ url('/warta') }}" class="nav-link">Warta</a>
-            <!-- MENU KHUSUS -->
-            <a href="{{ route('formulir') }}" class="nav-link nav-download">
-                <i class="fas fa-download"></i> Unduh Formulir
-            </a>
-            <a href="{{ route('Pengaduan') }}" class="nav-link nav-kontak">
-                <i class="fas fa-phone-alt"></i> Bantuan/Kontak
-            </a>
-        </div>
+            </nav>
 
-        <!-- Header Actions -->
-        <div class="header-actions">
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        </div>
+            <!-- Mobile Nav (tersembunyi default, muncul saat hamburger diklik) -->
+            <div class="mobile-nav" id="mobileNav">
+                <a href="{{ url('/') }}" class="nav-link">Beranda</a>
+                <a href="{{ url('/profile') }}" class="nav-link active">Profil</a>
+                <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
+                <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
+                <a href="{{ url('/warta') }}" class="nav-link">Warta</a>
+                <a href="{{ route('formulir') }}" class="nav-link nav-download">
+                    <i class="fas fa-download"></i> Unduh Formulir
+                </a>
+                <a href="{{ route('Pengaduan') }}" class="nav-link nav-kontak">
+                    <i class="fas fa-phone-alt"></i> Bantuan/Kontak
+                </a>
+            </div>
+
+            <!-- Header Actions (tombol hamburger) -->
+            <div class="header-actions">
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+        </div><!-- /.container -->
     </header>
 
-    <script>
-        const mobileBtn = document.querySelector(".mobile-menu-btn");
-        const mobileNav = document.getElementById("mobileNav");
-        mobileBtn.addEventListener("click", () => {
-            mobileNav.classList.toggle("active");
-            mobileBtn.classList.toggle("active");
-        });
-
-        // Scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('mainHeader');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    </script>
-
-    <!-- Home Page -->
+    <!-- =============================================
+         PAGE CONTENT
+    ============================================== -->
     <div id="home" class="page-content active">
-        <!-- Hero Slider -->
+
+        <!-- Hero Slider (sama seperti beranda agar konsisten) -->
         <div class="hero-slider">
             <div class="slide active" style="background-image: url('{{ asset('image/LAM Kepri.jpeg') }}');">
                 <div class="slide-content">
@@ -1009,7 +965,7 @@
 
                     <div class="sejarah-container">
                         <div class="timeline">
-                            <!-- 1985 -->
+
                             <div class="timeline-item">
                                 <div class="timeline-content">
                                     <div class="timeline-date">
@@ -1026,7 +982,6 @@
                                 <div class="timeline-marker"></div>
                             </div>
 
-                            <!-- 1991 -->
                             <div class="timeline-item">
                                 <div class="timeline-content">
                                     <div class="timeline-date">
@@ -1043,7 +998,6 @@
                                 <div class="timeline-marker"></div>
                             </div>
 
-                            <!-- 1992 -->
                             <div class="timeline-item">
                                 <div class="timeline-content">
                                     <div class="timeline-date">
@@ -1061,7 +1015,6 @@
                                 <div class="timeline-marker"></div>
                             </div>
 
-                            <!-- 1993 -->
                             <div class="timeline-item">
                                 <div class="timeline-content">
                                     <div class="timeline-date">
@@ -1079,7 +1032,6 @@
                                 <div class="timeline-marker"></div>
                             </div>
 
-                            <!-- 2024 -->
                             <div class="timeline-item">
                                 <div class="timeline-content">
                                     <div class="timeline-date">
@@ -1098,6 +1050,7 @@
                                 </div>
                                 <div class="timeline-marker"></div>
                             </div>
+
                         </div>
                     </div>
                 </section>
@@ -1108,28 +1061,21 @@
                     <p class="section-subtitle">Komitmen kami dalam memberikan pelayanan terbaik</p>
 
                     <div class="visi-misi-container">
-                        <!-- Visi Card -->
                         <div class="visi-card">
                             <div class="card-header">
-                                <div class="card-icon">
-                                    <i class="fas fa-eye"></i>
-                                </div>
+                                <div class="card-icon"><i class="fas fa-eye"></i></div>
                                 <h3 class="card-title">Visi</h3>
                             </div>
                             <div class="card-content">
                                 Menjadi Dana Pensiun Yang Sehat dan mampu Menjunjung Kepentingan
-                                Stakeholder/Pemangku
-                                Kepentingan Guna Jaminan Terpeliharanya kesinambungan Penghasilan Hari Tua Bagi
-                                Peserta
+                                Stakeholder/Pemangku Kepentingan Guna Jaminan Terpeliharanya kesinambungan
+                                Penghasilan Hari Tua Bagi Peserta
                             </div>
                         </div>
 
-                        <!-- Misi Card -->
                         <div class="misi-card">
                             <div class="card-header">
-                                <div class="card-icon">
-                                    <i class="fas fa-bullseye"></i>
-                                </div>
+                                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
                                 <h3 class="card-title">Misi</h3>
                             </div>
                             <div class="card-content">
@@ -1151,16 +1097,15 @@
                     <h2 class="section-title">Profil Organisasi</h2>
                     <p class="section-subtitle">Struktur kepemimpinan Dana Pensiun Bank Riau Kepri</p>
 
-                    <!-- Tab Navigation -->
                     <div class="tab-navigation">
-                        <button class="tab-btn active" onclick="openTab('dewan-pengawas')">Dewan Pengawas</button>
-                        <button class="tab-btn" onclick="openTab('pengurus')">Pengurus</button>
-                        <button class="tab-btn" onclick="openTab('kepala-dept')">Kepala Departemen</button>
+                        <button class="tab-btn active" onclick="openTab('dewan-pengawas', event)">Dewan
+                            Pengawas</button>
+                        <button class="tab-btn" onclick="openTab('pengurus', event)">Pengurus</button>
+                        <button class="tab-btn" onclick="openTab('kepala-dept', event)">Kepala Departemen</button>
                     </div>
 
                     <!-- Dewan Pengawas Tab -->
                     <div id="dewan-pengawas" class="tab-content active">
-                        <!-- Ketua Dewan Pengawas -->
                         <div class="profile-grid-single">
                             <div class="profile-card">
                                 <div class="profile-avatar">
@@ -1178,17 +1123,14 @@
                             </div>
                         </div>
 
-                        <!-- Anggota Dewan Pengawas -->
-                        {{-- <h3 style="text-align: center; color: #1a1a1a; font-size: 1.5rem; margin: 3rem 0 2rem 0;">
-                            Anggota Dewan Pengawas</h3> --}}
                         <div class="profile-grid-two">
                             <div class="profile-card">
                                 <div class="profile-avatar">
-                                    <img src="{{ asset('image/M.affan.png') }}" alt="M. Affan">
+                                    <img src="{{ asset('image/HELWIN_YUNUS_.jpg') }}" alt="Helwin Yunus">
                                 </div>
-                                <h3 class="profile-name">M. Affan</h3>
+                                <h3 class="profile-name">Helwin Yunus</h3>
                                 <p class="profile-position">Anggota Dewan Pengawas</p>
-                                <p class="profile-period">Periode: 2025-2029</p>
+                                <p class="profile-period">Periode: 2026-2030</p>
                                 <div class="profile-info">
                                     <div class="profile-info-item">
                                         <span class="profile-info-label">Status</span>
@@ -1198,9 +1140,7 @@
                             </div>
 
                             <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
+                                <div class="profile-avatar"><i class="fas fa-user"></i></div>
                                 <h3 class="profile-name">Nama Anggota 2</h3>
                                 <p class="profile-position">Anggota Dewan Pengawas</p>
                                 <p class="profile-period">Periode: -</p>
@@ -1213,9 +1153,7 @@
                             </div>
 
                             <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
+                                <div class="profile-avatar"><i class="fas fa-user"></i></div>
                                 <h3 class="profile-name">Nama Anggota 3</h3>
                                 <p class="profile-position">Anggota Dewan Pengawas</p>
                                 <p class="profile-period">Periode: -</p>
@@ -1231,29 +1169,28 @@
 
                     <!-- Pengurus Tab -->
                     <div id="pengurus" class="tab-content">
-                        <!-- Direktur Utama (PLT) -->
                         <div class="profile-grid-single">
                             <div class="profile-card">
                                 <div class="profile-avatar">
-                                    <i class="fas fa-user"></i>
+                                    <img src="{{ asset('image/M.Affan.png') }}" alt="M.Affan">
                                 </div>
-                                <h3 class="profile-name"></h3>
+                                <h3 class="profile-name">M.Affan</h3>
                                 <p class="profile-position">Direktur Utama</p>
-                                <div style="margin: 0.5rem 0; font-size: 0.9rem; color: #666; font-style: italic;">
-
+                                <p class="profile-period">Periode: 2026-2030</p>
+                                <div class="profile-info">
+                                    {{-- <div class="profile-info-item">
+                                        <span class="profile-info-label">Status</span>
+                                        <span class="profile-info-value">Direktur Utama</span>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Direktur -->
-                        {{-- <h3 style="text-align: center; color: #1a1a1a; font-size: 1.5rem; margin: 3rem 0 2rem 0;">
-                            Direktur</h3> --}}
-                        <div class="profile-grid-two">
+                        <div class="profile-grid-two" id="pengurus">
                             <div class="profile-card">
                                 <div class="profile-avatar">
                                     <img src="{{ asset('image/Edirison.png') }}" alt="Edirison">
                                 </div>
-                                <h3 class="profile-name"></h3>
                                 <h3 class="profile-name">Edirison</h3>
                                 <p class="profile-position">Direktur Umum</p>
                                 <p class="profile-period">Periode: 2025-2026</p>
@@ -1274,33 +1211,25 @@
                     <div id="kepala-dept" class="tab-content">
                         <div class="profile-grid">
                             <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <i class="fas fa-calculator"></i>
-                                </div>
+                                <div class="profile-avatar"><i class="fas fa-calculator"></i></div>
                                 <h3 class="profile-name">Firmansyah</h3>
                                 <p class="profile-position">Kepala Departemen Akuntansi & SI</p>
                             </div>
 
                             <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <i class="fas fa-users-cog"></i>
-                                </div>
+                                <div class="profile-avatar"><i class="fas fa-users-cog"></i></div>
                                 <h3 class="profile-name">Aresfanber</h3>
                                 <p class="profile-position">Kepala Departemen Umum & Kepesertaan</p>
                             </div>
 
                             <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <i class="fas fa-coins"></i>
-                                </div>
+                                <div class="profile-avatar"><i class="fas fa-coins"></i></div>
                                 <h3 class="profile-name">Nanang Eko Fadli</h3>
                                 <p class="profile-position">Kepala Departemen Investasi</p>
                             </div>
 
                             <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
+                                <div class="profile-avatar"><i class="fas fa-shield-alt"></i></div>
                                 <h3 class="profile-name">Dede Ermania</h3>
                                 <p class="profile-position">Kepala Satuan Pengawas Internal (SPI)</p>
                             </div>
@@ -1312,7 +1241,6 @@
                 <section class="section">
                     <h2 class="section-title">Struktur Organisasi</h2>
                     <p class="section-subtitle">Bagan organisasi Dana Pensiun Bank Riau Kepri</p>
-
                     <div class="struktur-container">
                         <img src="{{ asset('image/Struktur organisasi.png') }}" alt="Struktur Organisasi"
                             class="struktur-image">
@@ -1386,7 +1314,6 @@
                                     class="logo-img bg-white">
                             </a>
                         </div>
-
                         <div class="compliance-item">
                             <p>Terdaftar Sebagai Anggota:</p>
                             <a href="https://www.adpi.or.id" target="_blank" rel="noopener noreferrer">
@@ -1403,50 +1330,65 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
-        // Slider functionality
+        // Loading Screen
+        window.addEventListener("load", function() {
+            const loader = document.getElementById("loader-wrapper");
+            setTimeout(function() {
+                loader.classList.add("loader-hide");
+            }, 300);
+        });
+
+        // Mobile Menu — identik dengan beranda
+        const mobileBtn = document.querySelector(".mobile-menu-btn");
+        const mobileNav = document.getElementById("mobileNav");
+
+        mobileBtn.addEventListener("click", () => {
+            mobileNav.classList.toggle("active");
+            mobileBtn.classList.toggle("active");
+        });
+
+        // Header Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
 
         function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
             currentSlide = n;
             if (currentSlide >= slides.length) currentSlide = 0;
             if (currentSlide < 0) currentSlide = slides.length - 1;
-
             slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
         }
 
         function changeSlide(n) {
             showSlide(n);
         }
 
-        // Auto slide
         setInterval(() => {
             currentSlide++;
             showSlide(currentSlide);
         }, 5000);
 
-        // Tab Functionality
-        function openTab(tabName) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-            });
-
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach(btn => {
-                btn.classList.remove('active');
-            });
-
+        // Tab — menerima event sebagai parameter agar tidak bergantung pada global `event`
+        function openTab(tabName, e) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            e.currentTarget.classList.add('active');
         }
     </script>
+
 </body>
 
 </html>
