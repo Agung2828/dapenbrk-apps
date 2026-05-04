@@ -631,7 +631,7 @@
     <!-- LOADING SCREEN -->
     <div id="loader-wrapper">
         <div class="logo-container">
-            <img src="{{ asset('image/Loadinglogo.png') }}" alt="Logo Dana Pensiun" class="pulsing-logo">
+            <img src="{{ asset('image/logodapenbrk.png') }}" alt="Logo Dana Pensiun" class="pulsing-logo">
         </div>
     </div>
 

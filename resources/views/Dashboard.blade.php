@@ -54,8 +54,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50%       { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         #loader-wrapper.loader-hide {
@@ -172,8 +179,15 @@
         }
 
         @keyframes floating-pulse {
-            0%, 100% { transform: translateY(0); }
-            50%       { transform: translateY(-8px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         /* ============================
@@ -204,7 +218,9 @@
             z-index: 1;
         }
 
-        .slide::before { display: none; }
+        .slide::before {
+            display: none;
+        }
 
         .slide.active {
             opacity: 1;
@@ -239,8 +255,15 @@
         }
 
         @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ============================
@@ -310,7 +333,9 @@
             box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
         }
 
-        .quick-link-item-slider:hover::after { left: 130%; }
+        .quick-link-item-slider:hover::after {
+            left: 130%;
+        }
 
         .quick-link-item-slider .ql-icon {
             width: 60px;
@@ -429,8 +454,13 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .slider-arrow.prev { left: 40px; }
-        .slider-arrow.next { right: 40px; }
+        .slider-arrow.prev {
+            left: 40px;
+        }
+
+        .slider-arrow.next {
+            right: 40px;
+        }
 
         .hero-curved-bottom {
             position: absolute;
@@ -476,12 +506,29 @@
             transform: translateY(0) scale(1);
         }
 
-        .news-card:nth-child(1) { transition-delay: 0.1s; }
-        .news-card:nth-child(2) { transition-delay: 0.2s; }
-        .news-card:nth-child(3) { transition-delay: 0.3s; }
-        .news-card:nth-child(4) { transition-delay: 0.4s; }
-        .news-card:nth-child(5) { transition-delay: 0.5s; }
-        .news-card:nth-child(6) { transition-delay: 0.6s; }
+        .news-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .news-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .news-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .news-card:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .news-card:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .news-card:nth-child(6) {
+            transition-delay: 0.6s;
+        }
 
         .feature-item {
             opacity: 0;
@@ -494,12 +541,29 @@
             transform: translateY(0) scale(1);
         }
 
-        .feature-item:nth-child(1) { transition-delay: 0.1s; }
-        .feature-item:nth-child(2) { transition-delay: 0.2s; }
-        .feature-item:nth-child(3) { transition-delay: 0.3s; }
-        .feature-item:nth-child(4) { transition-delay: 0.4s; }
-        .feature-item:nth-child(5) { transition-delay: 0.5s; }
-        .feature-item:nth-child(6) { transition-delay: 0.6s; }
+        .feature-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .feature-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .feature-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .feature-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .feature-item:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .feature-item:nth-child(6) {
+            transition-delay: 0.6s;
+        }
 
         .news-image1 {
             width: 100%;
@@ -525,44 +589,138 @@
            RESPONSIVE
         ============================ */
         @media (max-width: 1200px) {
-            .nav-download, .nav-whatsapp { padding: 8px 12px; font-size: 0.85rem; }
+
+            .nav-download,
+            .nav-whatsapp {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 991px) {
+
             .main-nav .nav-download,
             .main-nav .nav-whatsapp,
-            .main-nav .nav-kontak { display: none; }
+            .main-nav .nav-kontak {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
-            .floating-whatsapp { bottom: 20px; right: 20px; }
-            .floating-whatsapp-link { width: 55px; height: 55px; }
-            .floating-whatsapp-link i { font-size: 1.8rem; }
-            .slide-content { margin-bottom: 500px; padding: 0 1.5rem; }
-            .slide-content h1 { font-size: 2rem; }
-            .slide-content p { font-size: 1rem; }
-            .quick-links-slider { bottom: 20px; }
-            .quick-links-grid-slider { flex-direction: column; gap: 0.8rem; max-width: 100%; padding: 0 1rem; }
-            .quick-link-item-slider { width: 100%; padding: 1.2rem 1rem; }
-            .quick-link-item-slider .ql-icon { width: 48px; height: 48px; margin-bottom: 0.75rem; }
-            .quick-link-item-slider .ql-icon i { font-size: 1.35rem; }
-            .quick-link-item-slider .ql-label { font-size: 0.88rem; }
-            .slider-dots { bottom: 550px; }
-            .slider-arrow { width: 45px; height: 45px; font-size: 1.2rem; }
-            .slider-arrow.prev { left: 15px; }
-            .slider-arrow.next { right: 15px; }
+            .floating-whatsapp {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .floating-whatsapp-link {
+                width: 55px;
+                height: 55px;
+            }
+
+            .floating-whatsapp-link i {
+                font-size: 1.8rem;
+            }
+
+            .slide-content {
+                margin-bottom: 500px;
+                padding: 0 1.5rem;
+            }
+
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+
+            .slide-content p {
+                font-size: 1rem;
+            }
+
+            .quick-links-slider {
+                bottom: 20px;
+            }
+
+            .quick-links-grid-slider {
+                flex-direction: column;
+                gap: 0.8rem;
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .quick-link-item-slider {
+                width: 100%;
+                padding: 1.2rem 1rem;
+            }
+
+            .quick-link-item-slider .ql-icon {
+                width: 48px;
+                height: 48px;
+                margin-bottom: 0.75rem;
+            }
+
+            .quick-link-item-slider .ql-icon i {
+                font-size: 1.35rem;
+            }
+
+            .quick-link-item-slider .ql-label {
+                font-size: 0.88rem;
+            }
+
+            .slider-dots {
+                bottom: 550px;
+            }
+
+            .slider-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+
+            .slider-arrow.prev {
+                left: 15px;
+            }
+
+            .slider-arrow.next {
+                right: 15px;
+            }
         }
 
         @media (max-width: 480px) {
-            .slide-content h1 { font-size: 1.6rem; }
-            .slide-content p { font-size: 0.9rem; }
-            .slide-content { margin-bottom: 530px; }
-            .slider-dots { bottom: 580px; }
-            .quick-links-slider { bottom: 15px; }
-            .quick-link-item-slider { padding: 1rem 0.8rem; }
-            .floating-whatsapp { bottom: 15px; right: 15px; }
-            .floating-whatsapp-link { width: 50px; height: 50px; }
-            .floating-whatsapp-link i { font-size: 1.6rem; }
+            .slide-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .slide-content p {
+                font-size: 0.9rem;
+            }
+
+            .slide-content {
+                margin-bottom: 530px;
+            }
+
+            .slider-dots {
+                bottom: 580px;
+            }
+
+            .quick-links-slider {
+                bottom: 15px;
+            }
+
+            .quick-link-item-slider {
+                padding: 1rem 0.8rem;
+            }
+
+            .floating-whatsapp {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .floating-whatsapp-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .floating-whatsapp-link i {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
@@ -572,7 +730,7 @@
     <!-- LOADING SCREEN -->
     <div id="loader-wrapper">
         <div class="logo-container">
-            <img src="{{ asset('image/Loadinglogo.png') }}" alt="Logo Dana Pensiun" class="pulsing-logo">
+            <img src="{{ asset('image/logodapenbrk.png') }}" alt="Logo Dana Pensiun" class="pulsing-logo">
         </div>
     </div>
 
@@ -719,10 +877,10 @@
                 @php
                     // Urutan prioritas tab
                     $urutanTab = ['penghargaan', 'pengumuman', 'kegiatan'];
-                    $labelTab  = [
+                    $labelTab = [
                         'penghargaan' => 'Penghargaan',
-                        'pengumuman'  => 'Pengumuman',
-                        'kegiatan'    => 'Kegiatan',
+                        'pengumuman' => 'Pengumuman',
+                        'kegiatan' => 'Kegiatan',
                     ];
 
                     // Tab pertama yang tersedia = default aktif
@@ -799,22 +957,26 @@
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                             <h3 class="feature-title">Terpercaya & Aman</h3>
-                            <p class="feature-desc">Diawasi OJK dengan sistem keamanan berlapis untuk melindungi dana Anda</p>
+                            <p class="feature-desc">Diawasi OJK dengan sistem keamanan berlapis untuk melindungi dana
+                                Anda</p>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
                             <h3 class="feature-title">Pengelolaan Profesional</h3>
-                            <p class="feature-desc">Tim ahli yang kompeten dan berpengalaman dalam mengelola dana pensiun</p>
+                            <p class="feature-desc">Tim ahli yang kompeten dan berpengalaman dalam mengelola dana
+                                pensiun</p>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-users"></i></div>
                             <h3 class="feature-title">Layanan Prima</h3>
-                            <p class="feature-desc">Pelayanan terbaik untuk memenuhi kebutuhan peserta dengan responsif</p>
+                            <p class="feature-desc">Pelayanan terbaik untuk memenuhi kebutuhan peserta dengan responsif
+                            </p>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
                             <h3 class="feature-title">Investasi Optimal</h3>
-                            <p class="feature-desc">Pengelolaan investasi yang optimal untuk hasil maksimal dan berkelanjutan</p>
+                            <p class="feature-desc">Pengelolaan investasi yang optimal untuk hasil maksimal dan
+                                berkelanjutan</p>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-balance-scale"></i></div>
@@ -824,7 +986,8 @@
                         <div class="feature-item">
                             <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
                             <h3 class="feature-title">Terus Berinovasi</h3>
-                            <p class="feature-desc">Mengembangkan produk sesuai perkembangan untuk memenuhi kebutuhan peserta</p>
+                            <p class="feature-desc">Mengembangkan produk sesuai perkembangan untuk memenuhi kebutuhan
+                                peserta</p>
                         </div>
                     </div>
                 </div>
@@ -874,7 +1037,8 @@
                     <ul style="margin-bottom: 2rem;">
                         <li style="display: flex; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.5rem;">
                             <i class="fas fa-map-marker-alt" style="margin-top: 0.25rem; color: #fbbf24;"></i>
-                            <span>Jl. Arifin Ahmad No. 54-56 Kel Sidomulyo Timur Kec Marpoyan Damai Pekanbaru - 28125</span>
+                            <span>Jl. Arifin Ahmad No. 54-56 Kel Sidomulyo Timur Kec Marpoyan Damai Pekanbaru -
+                                28125</span>
                         </li>
                         <li style="display: flex; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.5rem;">
                             <i class="fas fa-phone" style="color: #fbbf24;"></i>
@@ -889,7 +1053,8 @@
                         <div class="compliance-item">
                             <p>Terdaftar dan Diawasi Oleh:</p>
                             <a href="https://www.ojk.go.id" target="_blank" rel="noopener noreferrer">
-                                <img src="{{ asset('image/logo-ojk.jpg') }}" alt="OJK Logo" class="logo-img bg-white">
+                                <img src="{{ asset('image/logo-ojk.jpg') }}" alt="OJK Logo"
+                                    class="logo-img bg-white">
                             </a>
                         </div>
                         <div class="compliance-item">
@@ -931,7 +1096,7 @@
         // Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const dots   = document.querySelectorAll('.dot');
+        const dots = document.querySelectorAll('.dot');
 
         function showSlide(n) {
             slides.forEach(s => s.classList.remove('active'));
@@ -941,15 +1106,28 @@
             if (dots[currentSlide]) dots[currentSlide].classList.add('active');
         }
 
-        function changeSlide(n) { showSlide(n); }
-        function nextSlide()    { showSlide(currentSlide + 1); }
-        function prevSlide()    { showSlide(currentSlide - 1); }
+        function changeSlide(n) {
+            showSlide(n);
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
         setInterval(() => showSlide(currentSlide + 1), 5000);
 
         // Scroll Animations
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animated'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('animated');
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             // Sembunyikan card yang bukan tab default saat pertama load
@@ -967,7 +1145,8 @@
         document.querySelectorAll(".news-tabs").forEach(section => {
             section.querySelectorAll(".news-tab").forEach(tab => {
                 tab.addEventListener("click", () => {
-                    section.querySelectorAll(".news-tab").forEach(t => t.classList.remove("active"));
+                    section.querySelectorAll(".news-tab").forEach(t => t.classList.remove(
+                    "active"));
                     tab.classList.add("active");
                     const filter = tab.dataset.filter;
                     document.querySelectorAll(".news-card").forEach(card => {

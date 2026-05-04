@@ -714,7 +714,7 @@
     <div class="page-background"></div>
 
     <div id="loader-wrapper">
-        <img src="{{ asset('image/Loadinglogo.png') }}" alt="Logo" class="pulsing-logo">
+        <img src="{{ asset('image/logodapenbrk.png') }}" alt="Logo" class="pulsing-logo">
     </div>
 
     <div class="floating-whatsapp">
