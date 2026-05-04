@@ -35,13 +35,21 @@ class BeritaInformasiController extends Controller
      */
     public function dashboard()
     {
-        $berita = BeritaInformasi::orderByDesc('tanggal')->get();
+        $semuaBerita = BeritaInformasi::orderByDesc('tanggal')->get();
+
+        // Cek kategori mana yang sudah ada datanya
+        $kategoriTersedia = $semuaBerita
+            ->pluck('kategori')
+            ->map(fn($k) => strtolower($k))
+            ->unique()
+            ->values()
+            ->toArray();
 
         $sliders = Slider::where('is_active', true)
             ->orderBy('order')
             ->get();
 
-        return view('Dashboard', compact('berita', 'sliders'));
+        return view('Dashboard', compact('semuaBerita', 'kategoriTersedia', 'sliders'));
     }
 
     public function detail($id)
@@ -92,7 +100,6 @@ class BeritaInformasiController extends Controller
             ]);
         }
 
-        // ✅ admin resource berada di /admin/berita
         return redirect()->route('admin.berita.index')
             ->with('success', 'Berita berhasil ditambahkan!');
     }
@@ -123,25 +130,19 @@ class BeritaInformasiController extends Controller
 
         $berita = BeritaInformasi::findOrFail($id);
 
-        // upload foto baru jika ada
         if ($request->hasFile('foto')) {
-
-            // hapus foto lama
             if (!empty($berita->foto)) {
                 $oldFotoName = basename(str_replace('\\', '/', $berita->foto));
-                $oldPath = public_path('uploads/berita/' . $oldFotoName);
-
+                $oldPath     = public_path('uploads/berita/' . $oldFotoName);
                 if (File::exists($oldPath)) {
                     File::delete($oldPath);
                 }
             }
 
-            $file = $request->file('foto');
-
+            $file         = $request->file('foto');
             $original     = $file->getClientOriginalName();
             $safeOriginal = preg_replace('/\s+/', '_', $original);
-
-            $namaFoto = (string) Str::uuid() . '_' . $safeOriginal;
+            $namaFoto     = (string) Str::uuid() . '_' . $safeOriginal;
             $file->move(public_path('uploads/berita'), $namaFoto);
 
             $berita->foto = $namaFoto;
@@ -152,7 +153,7 @@ class BeritaInformasiController extends Controller
             'tanggal'   => $request->tanggal,
             'judul'     => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'foto'      => $berita->foto, // bisa null atau nama foto baru
+            'foto'      => $berita->foto,
         ]);
 
         return redirect()->route('admin.berita.index')
@@ -163,8 +164,6 @@ class BeritaInformasiController extends Controller
      * SHOW (DETAIL BERITA - PUBLIC)
      * route: GET /berita/{id}
      */
-
-
     public function show($id)
     {
         $berita = BeritaInformasi::findOrFail($id);
@@ -179,11 +178,9 @@ class BeritaInformasiController extends Controller
     {
         $berita = BeritaInformasi::findOrFail($id);
 
-        // hapus foto jika ada
         if (!empty($berita->foto)) {
             $fotoName = basename(str_replace('\\', '/', $berita->foto));
-            $path = public_path('uploads/berita/' . $fotoName);
-
+            $path     = public_path('uploads/berita/' . $fotoName);
             if (File::exists($path)) {
                 File::delete($path);
             }
