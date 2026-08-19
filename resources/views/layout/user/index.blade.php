@@ -53,9 +53,9 @@
     <!-- BACKSOUND PLAYLIST -->
     <script>
         window.backsoundPlaylist = [
-            "{{ asset('image/jingle1.mp3') }}",
-            "{{ asset('image/jingle2.mp3') }}",
-            "{{ asset('image/jingle3.mp3') }}"
+            "{{ asset('image/Jingle1.mp3') }}",
+            "{{ asset('image/Jingle2.mp3') }}",
+            "{{ asset('image/Jingle3.mp3') }}"
         ];
     </script>
     <script src="{{ asset('js/backsound.js') }}"></script>
