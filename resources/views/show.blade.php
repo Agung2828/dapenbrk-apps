@@ -88,6 +88,39 @@
             color: #777;
         }
 
+        /* ============================
+           BACKSOUND TOGGLE BUTTON
+           (FIX: dipindah keluar dari @media max-width:768px supaya
+           tombol tetap tampil fixed & berbentuk lingkaran di SEMUA
+           ukuran layar, termasuk desktop. Sebelumnya rule ini hanya
+           aktif di layar <=768px, jadi di desktop tombolnya jatuh
+           jadi <button> polos tanpa posisi/ukuran yang benar.)
+        ============================ */
+        .backsound-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .backsound-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.85);
+        }
+
         @media (max-width: 768px) {
             .page-header h1 {
                 font-size: 1.8rem;
@@ -101,7 +134,11 @@
 </head>
 
 <body>
-
+    <!-- BACKSOUND -->
+    <audio id="backsound"></audio>
+    <button id="toggleSound" class="backsound-toggle" aria-label="Toggle Backsound">
+        <i class="fas fa-volume-mute"></i>
+    </button>
     <!-- HEADER -->
     <div class="page-header">
         <h1>{{ $berita->judul }}</h1>
@@ -139,7 +176,14 @@
     <footer>
         &copy; {{ date('Y') }} Dana Pensiun Bank Riau Kepri
     </footer>
-
+    <script>
+        window.backsoundPlaylist = [
+            "{{ asset('image/jingle1.mp3') }}",
+            "{{ asset('image/jingle2.mp3') }}",
+            "{{ asset('image/jingle3.mp3') }}"
+        ];
+    </script>
+    <script src="{{ asset('js/backsound.js') }}"></script>
 </body>
 
 </html>

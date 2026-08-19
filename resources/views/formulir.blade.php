@@ -49,6 +49,19 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        .logo-section .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-secondary {
+            height: 45px;
+            /* sesuaikan dengan tinggi logo.png yang ada */
+            width: auto;
+            object-fit: contain;
+        }
+
         @keyframes pulse {
 
             0%,
@@ -76,6 +89,34 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f5f5f5;
             min-height: 100vh;
+        }
+
+        /* ============================
+           BACKSOUND TOGGLE BUTTON
+        ============================ */
+        .backsound-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .backsound-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.85);
         }
 
         /* ============================
@@ -556,6 +597,12 @@
 
 <body>
 
+    <!-- BACKSOUND -->
+    <audio id="backsound"></audio>
+    <button id="toggleSound" class="backsound-toggle" aria-label="Toggle Backsound">
+        <i class="fas fa-volume-mute"></i>
+    </button>
+
     <!-- LOADING SCREEN -->
     <div id="loader-wrapper">
         <div class="logo-container">
@@ -576,6 +623,7 @@
             <!-- Logo -->
             <div class="logo-section">
                 <a href="{{ url('/') }}" class="logo">
+                    <img src="{{ asset('image/logodanapensiun.png') }}" alt="Logo Dana Pensiun" class="logo-secondary">
                     <img src="{{ asset('image/logo.png') }}" alt="Logo">
                 </a>
             </div>
@@ -956,6 +1004,16 @@
             });
         });
     </script>
+
+    <!-- BACKSOUND PLAYLIST -->
+    <script>
+        window.backsoundPlaylist = [
+            "{{ asset('image/jingle1.mp3') }}",
+            "{{ asset('image/jingle2.mp3') }}",
+            "{{ asset('image/jingle3.mp3') }}"
+        ];
+    </script>
+    <script src="{{ asset('js/backsound.js') }}"></script>
 
 </body>
 
