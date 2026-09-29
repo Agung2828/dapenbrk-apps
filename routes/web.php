@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\FormPemutakhiranController;
 use App\Http\Controllers\MateriSosialisasiController;
 use App\Http\Controllers\PesertaSearchController;
 use App\Http\Controllers\WbsController;
+use App\Http\Controllers\AdminWbs\AuthController as AdminWbsAuthController;
+use App\Http\Controllers\AdminWbs\DashboardController as AdminWbsDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,24 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'processLogin'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+Route::prefix('admin-wbs')->name('adminwbs.')->group(function () {
+
+    Route::middleware('guest:adminwbs')->group(function () {
+        Route::get('/login', [AdminWbsAuthController::class, 'showLogin'])->name('login');
+        Route::post('/login', [AdminWbsAuthController::class, 'login'])->name('login.process');
+    });
+
+    Route::middleware('auth:adminwbs')->group(function () {
+        Route::post('/logout', [AdminWbsAuthController::class, 'logout'])->name('logout');
+        Route::get('/', [AdminWbsDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/laporan/create', [AdminWbsDashboardController::class, 'create'])->name('laporan.create');
+        Route::post('/laporan', [AdminWbsDashboardController::class, 'store'])->name('laporan.store');
+        Route::get('/laporan/{laporan}', [AdminWbsDashboardController::class, 'show'])->name('laporan.show');
+        Route::put('/laporan/{laporan}/status', [AdminWbsDashboardController::class, 'updateStatus'])->name('laporan.updateStatus');
+        Route::get('/laporan/{laporan}/pdf', [AdminWbsDashboardController::class, 'downloadPdf'])->name('laporan.pdf');
+    });
+});
 /*
 |--------------------------------------------------------------------------
 | API SEARCH & VERIFY PESERTA (HARUS DI ATAS ROUTE LAINNYA)

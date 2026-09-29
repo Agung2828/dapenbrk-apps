@@ -1257,6 +1257,224 @@
                 border-top: 1px dashed var(--line)
             }
 
+            /* ===== Peringatan wajib pilih Anonim/Non-Anonim ===== */
+            .anonim-warn {
+                display: none;
+                align-items: center;
+                gap: 8px;
+                margin-top: 12px;
+                padding: 10px 14px;
+                border-radius: 10px;
+                background: #fef2f2;
+                border: 1px solid #fecaca;
+                color: var(--red2);
+                font-size: 13px;
+                font-weight: 700
+            }
+
+            .anonim-warn.show {
+                display: flex
+            }
+
+            /* ===== Multi-terlapor ===== */
+            .terlapor-row {
+                position: relative;
+                border: 1.5px solid var(--line);
+                border-radius: 14px;
+                padding: 16px 16px 4px;
+                margin-bottom: 16px;
+                background: #fafcff
+            }
+
+            .terlapor-row-head {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 6px
+            }
+
+            .terlapor-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 12.5px;
+                font-weight: 800;
+                color: var(--navy);
+                background: #eef2ff;
+                border: 1px solid #dbeafe;
+                padding: 4px 12px;
+                border-radius: 50px
+            }
+
+            .terlapor-remove {
+                border: none;
+                background: #fef2f2;
+                color: var(--red);
+                width: 30px;
+                height: 30px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 13px;
+                transition: .2s
+            }
+
+            .terlapor-remove:hover {
+                background: var(--red);
+                color: #fff
+            }
+
+            /* ===== Bukti pendukung (upload multi-file) ===== */
+            .bukti-drop {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                text-align: center;
+                padding: 32px 20px;
+                border: 2px dashed var(--line);
+                border-radius: 16px;
+                background: #fafcff;
+                cursor: pointer;
+                transition: .25s
+            }
+
+            .bukti-drop:hover {
+                border-color: var(--gold);
+                background: #fffbeb
+            }
+
+            .bukti-drop i {
+                font-size: 30px;
+                color: var(--amber);
+                margin-bottom: 4px
+            }
+
+            .bukti-drop strong {
+                color: var(--navy);
+                font-size: 15px
+            }
+
+            .bukti-drop span {
+                font-size: 12.5px;
+                color: var(--muted)
+            }
+
+            .bukti-list {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-top: 14px
+            }
+
+            .bukti-empty {
+                font-size: 13px;
+                color: var(--muted);
+                font-style: italic;
+                text-align: center;
+                margin: 4px 0
+            }
+
+            .bukti-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 14px;
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                background: #fff
+            }
+
+            .bukti-item i {
+                color: var(--blue);
+                font-size: 18px;
+                flex-shrink: 0
+            }
+
+            .bukti-name {
+                flex: 1;
+                font-size: 13.5px;
+                font-weight: 600;
+                color: #374151;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+
+            .bukti-size {
+                font-size: 12px;
+                color: var(--muted);
+                flex-shrink: 0
+            }
+
+            .bukti-remove {
+                border: none;
+                background: #fef2f2;
+                color: var(--red);
+                width: 26px;
+                height: 26px;
+                border-radius: 7px;
+                cursor: pointer;
+                font-size: 12px;
+                flex-shrink: 0;
+                transition: .2s
+            }
+
+            .bukti-remove:hover {
+                background: var(--red);
+                color: #fff
+            }
+
+            /* ===== Review: daftar terlapor & bukti ===== */
+            .rv-terlapor-item {
+                padding: 10px 0;
+                border-bottom: 1px dashed var(--line)
+            }
+
+            .rv-terlapor-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0
+            }
+
+            .rv-terlapor-head {
+                font-size: 14px;
+                font-weight: 700;
+                color: var(--navy);
+                display: flex;
+                align-items: center;
+                gap: 8px
+            }
+
+            .rv-terlapor-head i {
+                color: var(--amber)
+            }
+
+            .rv-terlapor-sub {
+                font-size: 13px;
+                color: #555;
+                margin-top: 2px;
+                padding-left: 22px
+            }
+
+            .rv-bukti-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px
+            }
+
+            .rv-bukti-chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 12px;
+                border-radius: 50px;
+                background: #eff6ff;
+                border: 1px solid #dbeafe;
+                color: var(--navy);
+                font-size: 12.5px;
+                font-weight: 600
+            }
+
             .btn {
                 display: inline-flex;
                 align-items: center;
@@ -1944,8 +2162,7 @@
                             </div>
 
                             <h3 class="block-title reveal">Alur Tahapan Whistleblowing System</h3>
-                            <div class="scroll-hint"><i class="fas fa-angles-down"></i> Gulir ke bawah, tahapan tersorot
-                                otomatis</div>
+                            <div class="scroll-hint"><i class="fas fa-angles-down"></i></div>
                             <div class="spy" id="spyFlow">
                                 <div class="spy-rail"><i class="spy-fill"></i></div>
                                 <div class="spy-item">
@@ -1979,7 +2196,7 @@
 
                             <h3 class="block-title reveal">Kategori Pengaduan <span
                                     class="spy-count">{{ count($kategoriPengaduan) }} kategori</span></h3>
-                            <div class="scroll-hint"><i class="fas fa-angles-down"></i> Gulir, kategori berpindah otomatis
+                            <div class="scroll-hint"><i class="fas fa-angles-down"></i>
                             </div>
                             <div class="spy sm" id="spyKategori">
                                 <div class="spy-rail"><i class="spy-fill"></i></div>
@@ -2138,7 +2355,8 @@
                             <p class="h-sub">Isi laporan per langkah. Hanya butuh beberapa menit.</p>
                             <div class="stepper" id="stepper"></div>
 
-                            <form action="{{ route('wbs.store') }}" method="POST" id="formPelaporan" novalidate>
+                            <form action="{{ route('wbs.store') }}" method="POST" id="formPelaporan"
+                                enctype="multipart/form-data" novalidate>
                                 @csrf
 
                                 <div class="step" data-key="anonim" data-label="Status">
@@ -2150,7 +2368,7 @@
                                         <label class="anon-option" id="optAnonim">
                                             <input type="radio" name="is_anonim" value="1"
                                                 onchange="toggleAnonim(true)"
-                                                {{ old('is_anonim', '1') == '1' ? 'checked' : '' }}>
+                                                {{ old('is_anonim') === '1' ? 'checked' : '' }}>
                                             <div class="ic"><i class="fas fa-user-secret"></i></div>
                                             <div><strong>Anonim (Rahasia)</strong><span class="desc">Identitas Anda tidak
                                                     perlu diisi</span></div>
@@ -2163,6 +2381,10 @@
                                             <div><strong>Non-Anonim (Mencantumkan Identitas)</strong><span
                                                     class="desc">Agar tim investigasi dapat menghubungi Anda</span></div>
                                         </label>
+                                    </div>
+                                    <div id="anonimWarn" class="anonim-warn">
+                                        <i class="fas fa-circle-exclamation"></i>
+                                        Wajib memilih salah satu sebelum melanjutkan.
                                     </div>
                                 </div>
 
@@ -2226,26 +2448,33 @@
                                 <div class="step" data-key="terlapor" data-label="Terlapor">
                                     <div class="step-head">
                                         <h3>Siapa yang dilaporkan?</h3>
-                                        <p>Jika tidak tahu nama lengkap, tulis nama panggilan atau inisial.</p>
+                                        <p>Jika tidak tahu nama lengkap, tulis nama panggilan atau inisial. Bisa lebih
+                                            dari satu orang jika ada keterlibatan pihak lain (mis. kolusi antar-divisi).</p>
                                     </div>
-                                    <div class="form-grid">
-                                        <div class="form-group"><label>Nama Lengkap / Inisial Terlapor <span
-                                                    class="req">*</span></label><input type="text"
-                                                name="nama_terlapor" value="{{ old('nama_terlapor') }}" required></div>
-                                        <div class="form-group"><label>Jabatan / Divisi Terlapor</label>
-                                            <select name="jabatan_terlapor">
-                                                <option value="">-- Pilih --</option>
-                                                @foreach ($jabatanTerlapor as $jabatan)
-                                                    <option value="{{ $jabatan }}"
-                                                        {{ old('jabatan_terlapor') == $jabatan ? 'selected' : '' }}>
-                                                        {{ $jabatan }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group full"><label>Informasi Tambahan Terlapor (Opsional)</label>
-                                            <textarea name="info_tambahan_terlapor" rows="3"
-                                                placeholder="Ciri-ciri fisik, NIP, atau info lain yang membantu identifikasi">{{ old('info_tambahan_terlapor') }}</textarea>
-                                        </div>
+                                    <div id="terlaporList"></div>
+                                    <button type="button" class="btn btn-outline" id="btnAddTerlapor"
+                                        style="margin-top:6px;"><i class="fas fa-user-plus"></i> Tambah Terlapor</button>
+                                </div>
+
+                                <div class="step" data-key="bukti" data-label="Bukti">
+                                    <div class="step-head">
+                                        <h3>Bukti Pendukung <span
+                                                style="font-weight:600;color:var(--muted);font-size:13px;">(Opsional)</span>
+                                        </h3>
+                                        <p>Lampirkan dokumen, foto, rekaman audio, atau video sebagai bukti pendukung.
+                                            Boleh lebih dari satu file dalam satu laporan ini.</p>
+                                    </div>
+                                    <label class="bukti-drop" for="buktiInput">
+                                        <i class="fas fa-cloud-arrow-up"></i>
+                                        <strong>Klik untuk pilih file</strong>
+                                        <span>PDF, Word, gambar, audio, atau video &middot; maks
+                                            {{ $buktiMaxFiles }} file &middot; maks {{ $buktiMaxSizeMb }}MB/file</span>
+                                    </label>
+                                    <input type="file" id="buktiInput" name="bukti[]" multiple
+                                        accept="{{ collect($buktiExt)->map(fn($e) => '.' . $e)->implode(',') }}"
+                                        style="display:none;">
+                                    <div id="buktiList" class="bukti-list">
+                                        <p class="bukti-empty">Belum ada file dipilih.</p>
                                     </div>
                                 </div>
 
@@ -2443,12 +2672,15 @@
                 const allSteps = $$('.step', form);
                 let cur = 0;
 
-                const isAnonim = () => $('input[name="is_anonim"]:checked').value === '1';
+                const anonimChecked = () => $('input[name="is_anonim"]:checked');
+                const hasAnonimChoice = () => !!anonimChecked();
+                const isAnonim = () => anonimChecked()?.value === '1';
                 const activeSteps = () => allSteps.filter(s => !(s.dataset.key === 'identitas' && isAnonim()));
 
                 function toggleAnonim(anonim) {
                     $('#optAnonim').classList.toggle('checked', anonim);
                     $('#optNonAnonim').classList.toggle('checked', !anonim);
+                    $('#anonimWarn')?.classList.remove('show');
                     renderStepper();
                 }
 
@@ -2472,8 +2704,172 @@
                     if (last) buildReview();
                 }
 
+                /* ---------- Multi-terlapor: baris dinamis ---------- */
+                const JABATAN_OPTIONS = @json($jabatanTerlapor);
+                let terlaporSeq = 0;
+
+                function jabatanOptionsHtml(selected = '') {
+                    return '<option value="">-- Pilih --</option>' + JABATAN_OPTIONS.map(j =>
+                        `<option value="${esc(j)}" ${j === selected ? 'selected' : ''}>${esc(j)}</option>`).join('');
+                }
+
+                function terlaporRowHtml(idx) {
+                    return `
+                    <div class="terlapor-row" data-idx="${idx}">
+                        <div class="terlapor-row-head">
+                            <span class="terlapor-badge"><i class="fas fa-user-tag"></i> Terlapor</span>
+                            <button type="button" class="terlapor-remove" onclick="removeTerlapor(${idx})" aria-label="Hapus terlapor">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group"><label>Nama Lengkap / Inisial Terlapor <span class="req">*</span></label>
+                                <input type="text" name="terlapor[${idx}][nama_terlapor]" required></div>
+                            <div class="form-group"><label>Jabatan / Divisi Terlapor</label>
+                                <select name="terlapor[${idx}][jabatan_terlapor]">${jabatanOptionsHtml()}</select>
+                            </div>
+                            <div class="form-group full"><label>Informasi Tambahan (Opsional)</label>
+                                <textarea name="terlapor[${idx}][info_tambahan_terlapor]" rows="2"
+                                    placeholder="Ciri-ciri fisik, NIP, atau info lain yang membantu identifikasi"></textarea>
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                function renumberTerlapor() {
+                    const rows = $$('.terlapor-row');
+                    rows.forEach((row, i) => {
+                        row.querySelector('.terlapor-badge').innerHTML =
+                            `<i class="fas fa-user-tag"></i> Terlapor ${i + 1}`;
+                        row.querySelector('.terlapor-remove').style.visibility = rows.length > 1 ? 'visible' : 'hidden';
+                    });
+                }
+
+                function addTerlaporRow() {
+                    const idx = terlaporSeq++;
+                    $('#terlaporList').insertAdjacentHTML('beforeend', terlaporRowHtml(idx));
+                    renumberTerlapor();
+                }
+
+                window.removeTerlapor = function(idx) {
+                    const row = document.querySelector(`.terlapor-row[data-idx="${idx}"]`);
+                    if (row) row.remove();
+                    if (!$$('.terlapor-row').length) addTerlaporRow();
+                    else renumberTerlapor();
+                };
+
+                $('#btnAddTerlapor').onclick = addTerlaporRow;
+                addTerlaporRow(); // mulai dengan satu baris terlapor
+
+                /* ---------- Bukti pendukung: multi-file ---------- */
+                const buktiInput = $('#buktiInput');
+                const buktiList = $('#buktiList');
+                const BUKTI_MAX_FILES = @json($buktiMaxFiles);
+                const BUKTI_MAX_BYTES = @json($buktiMaxSizeMb) * 1024 * 1024;
+                const BUKTI_BLOCKED = ['php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phtml', 'phar',
+                    'exe', 'msi', 'bat', 'cmd', 'com', 'scr', 'dll', 'sh', 'ps1', 'vbs',
+                    'js', 'jar', 'html', 'htm', 'htaccess', 'cgi', 'pl', 'py'
+                ];
+                let buktiFiles = [];
+
+                function buktiIcon(name) {
+                    const ext = (name.split('.').pop() || '').toLowerCase();
+                    if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'heic'].includes(ext)) return 'fa-file-image';
+                    if (['mp3', 'wav', 'ogg', 'm4a', 'aac', 'amr', 'opus', 'flac'].includes(ext)) return 'fa-file-audio';
+                    if (['mp4', 'mov', 'avi', 'mkv', 'webm', '3gp', 'wmv', 'flv'].includes(ext)) return 'fa-file-video';
+                    if (ext === 'pdf') return 'fa-file-pdf';
+                    if (['doc', 'docx'].includes(ext)) return 'fa-file-word';
+                    if (['xls', 'xlsx', 'csv'].includes(ext)) return 'fa-file-excel';
+                    return 'fa-file';
+                }
+
+                function formatSize(bytes) {
+                    if (bytes < 1024) return bytes + ' B';
+                    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+                    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+                }
+
+                function syncBuktiInput() {
+                    const dt = new DataTransfer();
+                    buktiFiles.forEach(f => dt.items.add(f));
+                    buktiInput.files = dt.files;
+                }
+
+                function renderBuktiList() {
+                    buktiList.innerHTML = buktiFiles.length ? buktiFiles.map((f, i) => `
+        <div class="bukti-item">
+            <i class="fas ${buktiIcon(f.name)}"></i>
+            <span class="bukti-name" title="${esc(f.name)}">${esc(f.name)}</span>
+            <span class="bukti-size">${formatSize(f.size)}</span>
+            <button type="button" class="bukti-remove" onclick="removeBukti(${i})" aria-label="Hapus file">
+                <i class="fas fa-xmark"></i>
+            </button>
+        </div>`).join('') : '<p class="bukti-empty">Belum ada file dipilih.</p>';
+                }
+
+                window.removeBukti = function(idx) {
+                    buktiFiles.splice(idx, 1);
+                    syncBuktiInput();
+                    renderBuktiList();
+                };
+
+                buktiInput?.addEventListener('change', () => {
+                    const baru = Array.from(buktiInput.files);
+                    const ditolak = [];
+
+                    baru.forEach(f => {
+                        const ext = (f.name.split('.').pop() || '').toLowerCase();
+                        if (!f.name.includes('.') || BUKTI_BLOCKED.includes(ext)) {
+                            ditolak.push(f.name + ' (jenis file tidak diizinkan)');
+                        } else if (f.size > BUKTI_MAX_BYTES) {
+                            ditolak.push(f.name + ' (melebihi ' + (BUKTI_MAX_BYTES / 1024 / 1024) + ' MB)');
+                        } else if (buktiFiles.length >= BUKTI_MAX_FILES) {
+                            ditolak.push(f.name + ' (maksimal ' + BUKTI_MAX_FILES + ' file)');
+                        } else if (!buktiFiles.some(x => x.name === f.name && x.size === f.size)) {
+                            buktiFiles.push(f);
+                        }
+                    });
+
+                    syncBuktiInput();
+                    renderBuktiList();
+                    if (ditolak.length) toast('Tidak ditambahkan: ' + ditolak.join(', '));
+                });
+
+                buktiInput?.addEventListener('change', renderBuktiList);
+
                 function validateStep() {
                     const step = activeSteps()[cur];
+
+                    if (step.dataset.key === 'anonim') {
+                        if (!hasAnonimChoice()) {
+                            toast('Silakan pilih Anonim atau Non-Anonim terlebih dahulu.');
+                            $('#anonimWarn')?.classList.add('show');
+                            return false;
+                        }
+                        $('#anonimWarn')?.classList.remove('show');
+                        return true;
+                    }
+
+                    if (step.dataset.key === 'terlapor') {
+                        const rows = $$('.terlapor-row');
+                        let ok = rows.length > 0,
+                            firstBad = null;
+                        rows.forEach(row => {
+                            const inp = row.querySelector('[name*="[nama_terlapor]"]');
+                            const bad = !inp.value.trim();
+                            inp.closest('.form-group')?.classList.toggle('invalid', bad);
+                            if (bad) {
+                                ok = false;
+                                firstBad = firstBad || inp;
+                            }
+                        });
+                        if (!ok) {
+                            toast('Lengkapi nama/inisial setiap terlapor, atau hapus baris yang kosong.');
+                            firstBad?.focus();
+                        }
+                        return ok;
+                    }
+
                     let ok = true,
                         firstBad = null;
                     $$('input, select, textarea', step).forEach(f => {
@@ -2523,7 +2919,27 @@
                         e.preventDefault();
                         return;
                     }
+                    if (!hasAnonimChoice()) {
+                        e.preventDefault();
+                        cur = steps.findIndex(s => s.dataset.key === 'anonim');
+                        renderStepper();
+                        validateStep();
+                        return;
+                    }
                     for (let n = 0; n < steps.length - 1; n++) {
+                        if (steps[n].dataset.key === 'terlapor') {
+                            const rows = $$('.terlapor-row');
+                            const bad = !rows.length || rows.some(row => !row.querySelector('[name*="[nama_terlapor]"]')
+                                .value.trim());
+                            if (bad) {
+                                e.preventDefault();
+                                cur = n;
+                                renderStepper();
+                                validateStep();
+                                return;
+                            }
+                            continue;
+                        }
                         const bad = $$('[required]', steps[n]).find(f => !f.value.trim());
                         if (bad) {
                             e.preventDefault();
@@ -2576,16 +2992,35 @@
                         field('Deskripsi Kejadian', v('deskripsi_kejadian'), 'fa-file-lines', true) +
                         field('Deskripsi Kerugian', v('deskripsi_kerugian'), 'fa-coins', true);
 
-                    const terlapor = field('Nama/Inisial Terlapor', v('nama_terlapor'), 'fa-user-tag') +
-                        field('Jabatan/Divisi', sel('jabatan_terlapor'), 'fa-briefcase') +
-                        field('Info Tambahan', v('info_tambahan_terlapor'), 'fa-circle-info', true);
+                    const terlaporRows = $$('.terlapor-row').map((row, i) => {
+                        const nama = row.querySelector('[name*="[nama_terlapor]"]').value.trim();
+                        const jabSel = row.querySelector('[name*="[jabatan_terlapor]"]');
+                        const jab = jabSel && jabSel.value ? jabSel.selectedOptions[0].text : '';
+                        const info = row.querySelector('[name*="[info_tambahan_terlapor]"]').value.trim();
+                        return `<div class="rv-terlapor-item">
+                            <div class="rv-terlapor-head"><i class="fas fa-user-tag"></i> Terlapor ${i + 1}${nama ? ': ' + esc(nama) : ''}</div>
+                            ${jab ? `<div class="rv-terlapor-sub">Jabatan: ${esc(jab)}</div>` : ''}
+                            ${info ? `<div class="rv-terlapor-sub">Info: ${esc(info)}</div>` : ''}
+                        </div>`;
+                    }).join('');
+                    const terlapor = rawField('Daftar Terlapor', terlaporRows || `<div class="rv-val">${empty}</div>`,
+                        'fa-users', true);
+
+                    const buktiFiles = buktiInput ? Array.from(buktiInput.files) : [];
+                    const buktiHtml = buktiFiles.length ?
+                        `<div class="rv-bukti-list">${buktiFiles.map(f => `<span class="rv-bukti-chip"><i class="fas ${buktiIcon(f.name)}"></i> ${esc(f.name)}</span>`).join('')}</div>` :
+                        `<div class="rv-val"><em class="rv-empty">Tidak ada file dilampirkan</em></div>`;
+                    const bukti = rawField('File Terlampir', buktiHtml, 'fa-paperclip', true);
 
                     $('#reviewBox').innerHTML = group('Data Pelapor', 'fa-user-shield', pelapor) +
                         group('Rincian Kejadian', 'fa-triangle-exclamation', kejadian) +
-                        group('Pihak Terlapor', 'fa-user-tag', terlapor);
+                        group('Pihak Terlapor', 'fa-user-tag', terlapor) +
+                        group('Bukti Pendukung', 'fa-paperclip', bukti);
                 }
 
-                toggleAnonim(isAnonim());
+                // Tidak ada pilihan default — pengguna wajib memilih Anonim/Non-Anonim sendiri.
+                if (hasAnonimChoice()) toggleAnonim(isAnonim());
+                renderStepper();
                 if (hasErrors) {
                     cur = 0;
                     renderStepper();

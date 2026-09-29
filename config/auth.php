@@ -40,8 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'adminwbs' => [
+            'driver'   => 'session',
+            'provider' => 'admin_wbs',
+        ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -64,12 +67,15 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admin_wbs' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\AdminWbs::class,
+        ],
     ],
+    // 'users' => [
+    //     'driver' => 'database',
+    //     'table' => 'users',
+    // ],
 
     /*
     |--------------------------------------------------------------------------

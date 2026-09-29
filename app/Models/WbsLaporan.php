@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class WbsLaporan extends Model
@@ -21,9 +22,6 @@ class WbsLaporan extends Model
         'kategori_pengaduan',
         'deskripsi_kejadian',
         'deskripsi_kerugian',
-        'nama_terlapor',
-        'jabatan_terlapor',
-        'info_tambahan_terlapor',
         'status',
         'catatan_admin',
     ];
@@ -41,6 +39,16 @@ class WbsLaporan extends Model
                 $laporan->ticket_token = self::generateUniqueToken();
             }
         });
+    }
+
+    public function terlapors(): HasMany
+    {
+        return $this->hasMany(WbsTerlapor::class, 'wbs_laporan_id');
+    }
+
+    public function bukti(): HasMany
+    {
+        return $this->hasMany(WbsBuktiLaporan::class, 'wbs_laporan_id');
     }
 
     public static function generateUniqueToken(): string

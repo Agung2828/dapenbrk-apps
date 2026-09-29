@@ -2,82 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WbsLaporan;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Concerns\HandlesWbsLaporanInput;
 use App\Mail\WbsTokenMail;
+use App\Models\WbsLaporan;
 use App\Services\FonnteService;
-use Illuminate\Support\Facades\Mail;
+use App\Support\WbsOptions;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class WbsController extends Controller
 {
-    protected array $kategoriPengaduan = [
-        'Kecurangan Laporan Keuangan' =>
-        'Kesalahan penyajian yang disengaja atau kelalaian dalam jumlah/pengungkapan laporan keuangan yang tidak sesuai praktik akuntansi yang berlaku umum.',
-        'Korupsi' =>
-        'Penyalahgunaan wewenang atau jabatan untuk keuntungan pribadi/kelompok yang merugikan Dapen.',
-        'Pembocoran Informasi/Data Rahasia' =>
-        'Tindakan sengaja memberikan, meneruskan, atau menyebarkan data dan informasi rahasia Dapen kepada pihak yang tidak berhak.',
-        'Penipuan' =>
-        'Perbuatan tidak jujur atau tipu muslihat yang menimbulkan kerugian bagi Dapen, peserta, atau pihak lain.',
-        'Penyalahgunaan Aset' =>
-        'Penggunaan aset Dapen di luar peruntukan resmi atau untuk kepentingan pribadi.',
-        'Tindakan Lain yang Dapat Dipersamakan dengan Fraud' =>
-        'Pelanggaran lain di luar kategori di atas yang berpotensi merugikan Dapen, peserta, atau pihak lain.',
-    ];
-
-    protected array $jabatanTerlapor = [
-        'Pengurus (Direksi)',
-        'Dewan Pengawas',
-        'Departemen Investasi',
-        'Departemen Kepesertaan',
-        'Departemen Akuntansi',
-        'Departemen SI',
-        'Departemen Umum',
-        'Pihak Eksternal (Pihak Ketiga)',
-    ];
-
-    protected array $hubunganDapen = [
-        'karyawan'           => 'Karyawan Internal DAPEN',
-        'peserta_pensiunan'  => 'Peserta / Pensiunan (Penerima Manfaat)',
-        'vendor'             => 'Vendor / Pihak Ketiga (Mitra Investasi, IT, dll)',
-        'masyarakat_umum'    => 'Masyarakat Umum',
-    ];
+    use HandlesWbsLaporanInput;
 
     public function index()
     {
         return view('wbs', [
-            'kategoriPengaduan' => $this->kategoriPengaduan,
-            'jabatanTerlapor'   => $this->jabatanTerlapor,
-            'hubunganDapen'     => $this->hubunganDapen,
+            'kategoriPengaduan' => WbsOptions::kategoriPengaduan(),
+            'jabatanTerlapor'   => WbsOptions::jabatanTerlapor(),
+            'hubunganDapen'     => WbsOptions::hubunganDapen(),
+            'buktiMaxFiles'     => WbsOptions::buktiMaxFiles(),
+            'buktiMaxSizeMb'    => WbsOptions::buktiMaxSizeMb(),
+            'buktiExt'          => WbsOptions::buktiExt(),
         ]);
     }
 
     public function store(Request $request)
     {
-        $isAnonim = $request->boolean('is_anonim');
+        $isAnonim  = $request->boolean('is_anonim');
+        $validated = $request->validate($this->wbsLaporanRules($isAnonim));
 
-        $rules = [
-            'kategori_pengaduan'      => ['required', 'string'],
-            'deskripsi_kejadian'      => ['required', 'string'],
-            'deskripsi_kerugian'      => ['nullable', 'string'],
-            'nama_terlapor'           => ['required', 'string', 'max:255'],
-            'jabatan_terlapor'        => ['nullable', 'string'],
-            'info_tambahan_terlapor'  => ['nullable', 'string'],
-            'nama_lengkap'            => [$isAnonim ? 'nullable' : 'required', 'string', 'max:255'],
-            'hubungan_dapen'          => [$isAnonim ? 'nullable' : 'required', 'string'],
-            'nomor_identitas'         => ['nullable', 'string', 'max:50'],
-            'no_kontak'               => [$isAnonim ? 'nullable' : 'required', 'string', 'max:20'],
-            'email_pribadi'           => ['nullable', 'email', 'max:255'],
-        ];
+        $laporan = WbsLaporan::create([
+            'is_anonim'          => $isAnonim,
+            'nama_lengkap'       => $validated['nama_lengkap'] ?? null,
+            'hubungan_dapen'     => $validated['hubungan_dapen'] ?? null,
+            'nomor_identitas'    => $validated['nomor_identitas'] ?? null,
+            'no_kontak'          => $validated['no_kontak'] ?? null,
+            'email_pribadi'      => $validated['email_pribadi'] ?? null,
+            'kategori_pengaduan' => $validated['kategori_pengaduan'],
+            'deskripsi_kejadian' => $validated['deskripsi_kejadian'],
+            'deskripsi_kerugian' => $validated['deskripsi_kerugian'] ?? null,
+        ]);
 
-        $validated = $request->validate($rules);
-
-        $laporan = WbsLaporan::create(array_merge($validated, [
-            'is_anonim' => $isAnonim,
-        ]));
-
-        // Kirim notifikasi token ke WA & Email jika pelapor mengisi identitas (non-anonim)
+        $this->saveTerlaporDanBukti($laporan, $request);
         $this->kirimNotifikasiToken($laporan);
 
         return redirect()
@@ -86,34 +53,9 @@ class WbsController extends Controller
             ->with('open_tab', 'pelaporan');
     }
 
-    private function kirimNotifikasiToken(WbsLaporan $laporan): void
-    {
-        // Kirim WhatsApp via Fonnte
-        if (!empty($laporan->no_kontak)) {
-            $pesan = "Terima kasih telah menyampaikan laporan melalui *Whistleblowing System* "
-                . "Dana Pensiun Bank Riau Kepri.\n\n"
-                . "Nomor Tiket Anda:\n*{$laporan->ticket_token}*\n\n"
-                . "Simpan nomor tiket ini untuk melacak status laporan Anda melalui halaman "
-                . "Lacak Pelaporan di situs resmi kami.\n\n"
-                . "Kerahasiaan identitas dan laporan Anda kami jamin sepenuhnya.";
-
-            FonnteService::sendMessage($laporan->no_kontak, $pesan);
-        }
-
-        // Kirim Email
-        if (!empty($laporan->email_pribadi)) {
-            try {
-                Mail::to($laporan->email_pribadi)->send(new WbsTokenMail($laporan));
-            } catch (\Throwable $e) {
-                Log::error('Gagal mengirim email token WBS: ' . $e->getMessage());
-            }
-        }
-    }
     public function lacak(Request $request)
     {
-        $request->validate([
-            'ticket_token' => ['required', 'string'],
-        ]);
+        $request->validate(['ticket_token' => ['required', 'string']]);
 
         $laporan = WbsLaporan::where('ticket_token', trim($request->ticket_token))->first();
 
@@ -133,5 +75,25 @@ class WbsController extends Controller
             'catatan_admin'      => $laporan->catatan_admin,
             'tanggal_lapor'      => $laporan->created_at->translatedFormat('d F Y, H:i'),
         ]);
+    }
+
+    private function kirimNotifikasiToken(WbsLaporan $laporan): void
+    {
+        if (!empty($laporan->no_kontak)) {
+            $pesan = "Terima kasih telah menyampaikan laporan melalui *Whistleblowing System* "
+                . "Dana Pensiun Bank Riau Kepri.\n\nNomor Tiket Anda:\n*{$laporan->ticket_token}*\n\n"
+                . "Simpan nomor tiket ini untuk melacak status laporan Anda melalui halaman "
+                . "Lacak Pelaporan di situs resmi kami.\n\nKerahasiaan identitas dan laporan Anda kami jamin sepenuhnya.";
+
+            FonnteService::sendMessage($laporan->no_kontak, $pesan);
+        }
+
+        if (!empty($laporan->email_pribadi)) {
+            try {
+                Mail::to($laporan->email_pribadi)->send(new WbsTokenMail($laporan));
+            } catch (\Throwable $e) {
+                Log::error('Gagal mengirim email token WBS: ' . $e->getMessage());
+            }
+        }
     }
 }

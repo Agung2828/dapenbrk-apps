@@ -25,10 +25,9 @@ return new class extends Migration
             $table->text('deskripsi_kejadian');
             $table->text('deskripsi_kerugian')->nullable();
 
-            // Identitas Terlapor
-            $table->string('nama_terlapor');
-            $table->string('jabatan_terlapor')->nullable();
-            $table->text('info_tambahan_terlapor')->nullable();
+            // NB: identitas terlapor sekarang di tabel wbs_terlapors (bisa lebih dari satu
+            // orang per laporan), jadi kolom nama_terlapor/jabatan_terlapor/info_tambahan_terlapor
+            // milik versi lama TIDAK dibuat lagi di sini.
 
             // Status & Tindak Lanjut (diisi/diupdate admin nanti)
             $table->enum('status', [
@@ -43,10 +42,42 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        // Multi-terlapor: satu laporan bisa punya lebih dari satu pihak yang dilaporkan
+        // (mis. kasus kolusi/kerja sama antar-divisi atau dengan pihak luar).
+        Schema::create('wbs_terlapors', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('wbs_laporan_id')
+                ->constrained('wbs_laporans')
+                ->cascadeOnDelete();
+            $table->string('nama_terlapor');
+            $table->string('jabatan_terlapor')->nullable();
+            $table->text('info_tambahan_terlapor')->nullable();
+            $table->timestamps();
+        });
+
+        // Bukti pendukung: satu laporan bisa melampirkan lebih dari satu file
+        // (PDF, Word, gambar, audio, atau video).
+        Schema::create('wbs_bukti_laporans', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('wbs_laporan_id')
+                ->constrained('wbs_laporans')
+                ->cascadeOnDelete();
+            $table->string('nama_file_asli');
+            $table->string('path_file');
+            $table->string('mime_type')->nullable();
+            $table->string('ekstensi', 10)->nullable();
+            $table->unsignedBigInteger('ukuran_bytes')->nullable();
+            $table->enum('jenis_bukti', ['dokumen', 'gambar', 'audio', 'video', 'lainnya'])
+                ->default('lainnya');
+            $table->timestamps();
+        });
     }
 
     public function down(): void
     {
+        Schema::dropIfExists('wbs_bukti_laporans');
+        Schema::dropIfExists('wbs_terlapors');
         Schema::dropIfExists('wbs_laporans');
     }
 };
