@@ -2051,7 +2051,7 @@
 
                                 <div class="zig-item L" data-zig>
                                     <div class="zig-dot"><span class="zig-num">3</span><img
-                                            src="{{ asset('image/prosedur/3-investigasi.jpg') }}" alt="Audit Investigasi"
+                                            src="{{ asset('image/investigasi.jpg') }}" alt="Audit Investigasi"
                                             loading="lazy" onerror="this.style.display='none'"></div>
                                     <div class="zig-card">
                                         <h4>Audit Investigasi</h4>
@@ -2061,8 +2061,8 @@
                                 </div>
                                 <div class="zig-item R" data-zig>
                                     <div class="zig-dot"><span class="zig-num">4</span><img
-                                            src="{{ asset('image/prosedur/4-lhi.jpg') }}" alt="Penyusunan LHI"
-                                            loading="lazy" onerror="this.style.display='none'"></div>
+                                            src="{{ asset('image/lhi.jpg') }}" alt="Penyusunan LHI" loading="lazy"
+                                            onerror="this.style.display='none'"></div>
                                     <div class="zig-card">
                                         <h4>Penyusunan LHI</h4>
                                         <p>LHI &amp; rekomendasi sanksi disusun.</p>
@@ -2071,9 +2071,8 @@
                                 </div>
                                 <div class="zig-item L" data-zig>
                                     <div class="zig-dot"><span class="zig-num">5</span><img
-                                            src="{{ asset('image/prosedur/5-rekomendasi.jpg') }}"
-                                            alt="Penyampaian Rekomendasi" loading="lazy"
-                                            onerror="this.style.display='none'"></div>
+                                            src="{{ asset('image/rekomendasi.jpg') }}" alt="Penyampaian Rekomendasi"
+                                            loading="lazy" onerror="this.style.display='none'"></div>
                                     <div class="zig-card">
                                         <h4>Penyampaian Rekomendasi</h4>
                                         <p>Disampaikan ke Pengurus &amp; Dewan Pengawas.</p>
@@ -2082,9 +2081,8 @@
                                 </div>
                                 <div class="zig-item R" data-zig>
                                     <div class="zig-dot"><span class="zig-num">6</span><img
-                                            src="{{ asset('image/prosedur/6-keputusan.jpg') }}"
-                                            alt="Keputusan &amp; Eksekusi" loading="lazy"
-                                            onerror="this.style.display='none'"></div>
+                                            src="{{ asset('image/keputusan.jpg') }}" alt="Keputusan &amp; Eksekusi"
+                                            loading="lazy" onerror="this.style.display='none'"></div>
                                     <div class="zig-card">
                                         <h4>Keputusan &amp; Eksekusi</h4>
                                         <p>Sanksi dieksekusi, insiden dilaporkan ke OJK.</p>
@@ -2841,6 +2839,25 @@
                     addEventListener('resize', req);
                     addEventListener('load', req);
                     req();
+                })();
+            </script>
+
+            <script>
+                (function() {
+                    const items = document.querySelectorAll('.zig-item');
+                    const io = 'IntersectionObserver' in window ?
+                        new IntersectionObserver(entries => {
+                            entries.forEach(en => {
+                                if (en.isIntersecting) {
+                                    en.target.classList.add('in');
+                                    io.unobserve(en.target);
+                                }
+                            });
+                        }, {
+                            threshold: .25
+                        }) :
+                        null;
+                    items.forEach(el => io ? io.observe(el) : el.classList.add('in'));
                 })();
             </script>
 
