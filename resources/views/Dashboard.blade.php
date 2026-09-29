@@ -803,6 +803,8 @@
                 <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
                 <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
                 <a href="{{ url('/warta') }}" class="nav-link">Warta</a>
+                <a href="{{ route('wbs.index') }}"
+                    class="nav-link {{ request()->routeIs('wbs.*') ? 'active' : '' }}">WBS</a>
                 <a href="{{ route('formulir') }}" class="nav-link nav-download">
                     <i class="fas fa-download"></i> Unduh Formulir
                 </a>
@@ -817,6 +819,8 @@
                 <a href="{{ route('Galeri') }}" class="nav-link">Galeri</a>
                 <a href="{{ url('/kepesertaan') }}" class="nav-link">Kepesertaan</a>
                 <a href="{{ url('/warta') }}" class="nav-link">Warta</a>
+                <a href="{{ route('wbs.index') }}"
+                    class="nav-link {{ request()->routeIs('wbs.*') ? 'active' : '' }}">WBS</a>
                 <a href="{{ route('formulir') }}" class="nav-link nav-download">
                     <i class="fas fa-download"></i> Unduh Formulir
                 </a>

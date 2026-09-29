@@ -1,150 +1,136 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('backsound');
-    const toggleBtn = document.getElementById('toggleSound');
-    if (!audio || !toggleBtn) return;
+/* ============================================================
+   BACKSOUND - satu pemutar untuk semua halaman
+   - Aman walau script ter-load 2x atau tombol/audio dobel di HTML
+   - Lagu lanjut di halaman lain (lagu, posisi detik, status main/mati)
+   ============================================================ */
+(function () {
+    if (window.__backsoundInit) return;
+    window.__backsoundInit = true;
 
-    // Playlist diambil dari variable global yang didefinisikan di tiap halaman blade
-    const playlist = window.backsoundPlaylist || [];
-    if (playlist.length === 0) return;
+    const KEY = 'dapen_backsound_state';
+    const playlist = Array.isArray(window.backsoundPlaylist) ? window.backsoundPlaylist : [];
+    if (!playlist.length) return;
 
-    let currentIndex = sessionStorage.getItem('backsound_index');
-    if (currentIndex === null || parseInt(currentIndex) >= playlist.length) {
-        currentIndex = Math.floor(Math.random() * playlist.length);
-    } else {
-        currentIndex = parseInt(currentIndex);
-    }
+    /* ---------- State tersimpan ---------- */
+    const load = () => {
+        try { return JSON.parse(sessionStorage.getItem(KEY)) || {}; } catch (e) { return {}; }
+    };
+    const save = (patch) => {
+        try {
+            const s = Object.assign(load(), patch);
+            sessionStorage.setItem(KEY, JSON.stringify(s));
+        } catch (e) { }
+    };
 
-    let isPlaying = sessionStorage.getItem('backsound_playing') !== 'false';
-    const savedTime = parseFloat(sessionStorage.getItem('backsound_time')) || 0;
-
-    audio.src = playlist[currentIndex];
-    audio.volume = 0.5;
-    audio.currentTime = savedTime;
-
-    // FIX: ikon sekarang mempertimbangkan audio.muted juga, bukan hanya isPlaying.
-    // Kalau audio sedang "playing" tapi muted (misalnya karena diblokir autoplay
-    // policy browser), ikon akan tetap menampilkan volume-mute, bukan volume-up
-    // yang menyesatkan.
-    function updateIcon() {
-        const showAsUnmuted = isPlaying && !audio.muted;
-        toggleBtn.innerHTML = showAsUnmuted
-            ? '<i class="fas fa-volume-up"></i>'
-            : '<i class="fas fa-volume-mute"></i>';
-    }
-
-    function saveState() {
-        sessionStorage.setItem('backsound_index', currentIndex);
-        sessionStorage.setItem('backsound_time', audio.currentTime);
-        sessionStorage.setItem('backsound_playing', isPlaying);
-    }
-
-    function playNextRandom() {
-        let nextIndex;
-        if (playlist.length > 1) {
-            do {
-                nextIndex = Math.floor(Math.random() * playlist.length);
-            } while (nextIndex === currentIndex);
-        } else {
-            nextIndex = 0;
+    function init() {
+        /* ---------- Hapus duplikat ---------- */
+        const audios = Array.from(document.querySelectorAll('audio#backsound'));
+        let audio = audios[0];
+        audios.slice(1).forEach(a => { a.pause(); a.remove(); });
+        if (!audio) {
+            audio = document.createElement('audio');
+            audio.id = 'backsound';
+            document.body.appendChild(audio);
         }
-        currentIndex = nextIndex;
-        audio.src = playlist[currentIndex];
-        audio.currentTime = 0;
-        audio.play().catch(() => { });
-        saveState();
-    }
 
-    // Sekali user melakukan interaksi APAPUN (klik, tap, scroll, keydown),
-    // audio langsung di-unmute (kalau saat itu masih muted karena autoplay policy).
-    function bindUnmuteOnInteraction() {
-        const unmute = () => {
-            if (audio.muted) {
-                audio.muted = false;
-            }
-            if (isPlaying && audio.paused) {
-                audio.play().catch(() => { });
-            }
-            // FIX: update ikon setelah status muted berubah lewat interaksi umum,
-            // supaya ikon langsung sinkron (bukan menunggu klik tombol lagi).
-            updateIcon();
-            saveState();
+        const btns = Array.from(document.querySelectorAll('#toggleSound, .backsound-toggle'));
+        let btn = btns[0];
+        btns.slice(1).forEach(b => b.remove());
+        if (!btn) {
+            btn = document.createElement('button');
+            btn.id = 'toggleSound';
+            btn.className = 'backsound-toggle';
+            btn.setAttribute('aria-label', 'Toggle Backsound');
+            btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            btn.style.cssText = 'position:fixed;bottom:30px;left:30px;z-index:9999;width:50px;height:50px;' +
+                'border-radius:50%;background:rgba(0,0,0,.7);color:#fff;border:none;display:flex;' +
+                'align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;';
+            document.body.appendChild(btn);
+        }
+
+        // Buang listener lama (kalau ada) dengan mengganti node tombol
+        const fresh = btn.cloneNode(true);
+        btn.replaceWith(fresh);
+        btn = fresh;
+
+        const icon = () => btn.querySelector('i');
+        const setIcon = (on) => {
+            const i = icon();
+            if (i) i.className = 'fas ' + (on ? 'fa-volume-up' : 'fa-volume-mute');
         };
-        ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
-            document.addEventListener(evt, unmute, { once: true, passive: true });
-        });
-    }
 
-    function tryPlay() {
-        // Percobaan 1: langsung play dengan suara (browser bisa izinkan
-        // kalau user sudah pernah berinteraksi dengan audio di origin ini sebelumnya)
-        audio.muted = false;
-        audio.play().then(() => {
-            isPlaying = true;
-            updateIcon();
-        }).catch(() => {
-            // Percobaan 2: browser blokir autoplay bersuara -> putar dalam mode muted
-            // (ini SELALU diizinkan browser), lalu auto-unmute di interaksi pertama.
-            audio.muted = true;
-            audio.play().then(() => {
-                isPlaying = true;
-                // FIX: ikon tetap menampilkan "muted" di sini (bukan volume-up)
-                // karena audio.muted masih true - updateIcon() sekarang menangani ini sendiri.
-                updateIcon();
-                bindUnmuteOnInteraction();
-            }).catch(() => {
-                // Kalaupun muted-play gagal (jarang terjadi), fallback terakhir:
-                // tunggu interaksi pertama baru play seperti biasa.
-                isPlaying = false;
-                updateIcon();
+        /* ---------- Pemutar ---------- */
+        const st = load();
+        let index = Number.isInteger(st.index) && st.index < playlist.length ? st.index : 0;
+        audio.loop = false;
+        audio.preload = 'auto';
+        audio.src = playlist[index];
+
+        const wantPlay = st.playing === true;
+        const resumeAt = typeof st.time === 'number' ? st.time : 0;
+
+        audio.addEventListener('loadedmetadata', function once() {
+            if (resumeAt > 0 && resumeAt < (audio.duration || Infinity)) {
+                try { audio.currentTime = resumeAt; } catch (e) { }
+            }
+            audio.removeEventListener('loadedmetadata', once);
+        });
+
+        audio.addEventListener('ended', () => {
+            index = (index + 1) % playlist.length;
+            audio.src = playlist[index];
+            save({ index, time: 0 });
+            audio.play().catch(() => { });
+        });
+
+        audio.addEventListener('play', () => { setIcon(true); save({ playing: true, index }); });
+        audio.addEventListener('pause', () => {
+            if (!audio.ended) setIcon(false);
+        });
+
+        /* Simpan posisi lagu secara berkala dan sebelum pindah halaman */
+        let last = 0;
+        audio.addEventListener('timeupdate', () => {
+            const now = Date.now();
+            if (now - last > 1000) { last = now; save({ time: audio.currentTime, index }); }
+        });
+        const persist = () => save({ time: audio.currentTime, index });
+        window.addEventListener('pagehide', persist);
+        window.addEventListener('beforeunload', persist);
+
+        /* ---------- Tombol ---------- */
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => save({ playing: true })).catch(() => { });
+            } else {
+                audio.pause();
+                save({ playing: false, time: audio.currentTime });
+            }
+        });
+
+        /* ---------- Lanjutkan otomatis di halaman baru ---------- */
+        if (wantPlay) {
+            setIcon(true);
+            audio.play().catch(() => {
+                // Browser memblokir autoplay: lanjut di interaksi pertama (klik/tap/tombol/scroll)
+                setIcon(false);
+                const resume = (e) => {
+                    if (btn.contains(e.target)) return cleanup(); // biar tombol yang menangani
+                    audio.play().catch(() => { });
+                    cleanup();
+                };
+                const evts = ['pointerdown', 'keydown', 'touchstart', 'wheel'];
+                const cleanup = () => evts.forEach(ev => window.removeEventListener(ev, resume, true));
+                evts.forEach(ev => window.addEventListener(ev, resume, { capture: true, passive: true }));
             });
-        });
-    }
-
-    if (isPlaying) {
-        tryPlay();
-    } else {
-        updateIcon();
-    }
-
-    // Fallback umum: kalau semua percobaan di atas tetap gagal total,
-    // interaksi pertama di body akan memaksa play.
-    document.body.addEventListener('click', function firstInteraction() {
-        if (isPlaying && audio.paused) {
-            audio.muted = false;
-            audio.play().catch(() => { });
-            updateIcon();
-        }
-        document.body.removeEventListener('click', firstInteraction);
-    }, { once: true });
-
-    // FIX UTAMA: sebelumnya toggle hanya mengecek isPlaying, sehingga ketika
-    // audio sedang "playing" tapi muted (kasus autoplay diblokir), klik pertama
-    // pada tombol malah men-DIAM-kan lagu sepenuhnya (audio.pause()) alih-alih
-    // meng-unmute-nya. Sekarang toggle mengecek kombinasi isPlaying DAN audio.muted:
-    // - Kalau sedang benar-benar terdengar (playing & tidak muted) -> pause (mute penuh).
-    // - Kalau sedang diam (paused ATAU playing-tapi-muted) -> unmute & play.
-    toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-
-        const currentlyAudible = isPlaying && !audio.muted && !audio.paused;
-
-        if (currentlyAudible) {
-            audio.pause();
-            isPlaying = false;
         } else {
-            audio.muted = false;
-            isPlaying = true;
-            audio.play().catch(() => { });
+            setIcon(false);
         }
+    }
 
-        updateIcon();
-        saveState();
-    });
-
-    audio.addEventListener('ended', () => {
-        playNextRandom();
-    });
-
-    setInterval(saveState, 1000);
-    window.addEventListener('beforeunload', saveState);
-});
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();

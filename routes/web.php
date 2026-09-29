@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PesertaController;
 use App\Http\Controllers\Admin\FormPemutakhiranController;
 use App\Http\Controllers\MateriSosialisasiController;
 use App\Http\Controllers\PesertaSearchController;
+use App\Http\Controllers\WbsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,16 @@ Route::get('/berita/{id}', [BeritaInformasiController::class, 'show'])
 
 Route::get('/berita-detail/{id}', [BeritaInformasiController::class, 'detail'])
     ->name('berita.detail');
-
+/*
+|--------------------------------------------------------------------------
+| WBS (WHISTLEBLOWING SYSTEM)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('wbs')->name('wbs.')->group(function () {
+    Route::get('/', [WbsController::class, 'index'])->name('index');
+    Route::post('/laporan', [WbsController::class, 'store'])->name('store');
+    Route::post('/lacak', [WbsController::class, 'lacak'])->name('lacak');
+});
 /*
 |--------------------------------------------------------------------------
 | GALERI PUBLIK
