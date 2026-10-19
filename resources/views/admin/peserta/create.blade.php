@@ -1,53 +1,57 @@
 @extends('layout.admin.index')
 
-@section('content')
+@section('page-title', 'Tambah Peserta')
+
+@push('styles')
     <style>
-        .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
         }
 
-        .card-header {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .panel {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px;
+            max-width: 860px;
+            animation: fadeUp .45s ease both;
         }
 
-        form {
-            padding: 2rem;
+        .panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .panel-sub {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
         }
 
         .form-control {
-            width: 100%;
-            padding: .75rem 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border-radius: 10px;
+            border-color: #e2e8f0;
+            padding: .6rem .85rem;
         }
 
         .form-control:focus {
             border-color: #3b82f6;
-            outline: none;
-        }
-
-        .date-wrapper {
-            position: relative;
-        }
-
-        .calendar-icon {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6b7280;
-            pointer-events: none;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
         }
 
         .currency-wrapper {
@@ -56,169 +60,171 @@
 
         .currency-prefix {
             position: absolute;
-            left: 1rem;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
+            color: #64748b;
+            font-weight: 600;
+            font-size: 14px;
+            pointer-events: none;
         }
 
         .currency-input {
-            padding-left: 3rem !important;
+            padding-left: 44px !important;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #1e3a8a);
-            color: white;
-            border: none;
-            padding: .85rem 2.5rem;
-            border-radius: 8px;
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
         }
 
-        .text-danger {
-            font-size: .85rem;
+        .form-actions .btn {
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 576px) {
+            .panel {
+                padding: 14px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
         }
     </style>
+@endpush
 
-
-    <div class="card">
-        <div class="card-header">
-            <h3>Tambah Peserta</h3>
-            <a href="{{ route('admin.peserta.index') }}" class="btn">
-                ← Kembali
+@section('content')
+    <div class="panel">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+            <div>
+                <h5 class="panel-title">Tambah Peserta</h5>
+                <div class="panel-sub">Lengkapi data peserta di bawah ini</div>
+            </div>
+            <a href="{{ route('admin.peserta.index') }}" class="btn btn-light border btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali
             </a>
         </div>
 
-        <form method="POST" action="{{ route('admin.peserta.store') }}">
+        <form method="POST" action="{{ route('admin.peserta.store') }}" id="formPeserta" novalidate>
             @csrf
 
-            {{-- =========================
-           KODE
-        ========================== --}}
-            <div class="form-group">
-                <label>Kode</label>
-                <input name="kode" value="{{ old('kode') }}" class="form-control" required>
-                @error('kode')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="kode">Kode</label>
+                    <input id="kode" name="kode" value="{{ old('kode') }}"
+                        class="form-control @error('kode') is-invalid @enderror" required>
+                    @error('kode')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="nik">NIK</label>
+                    <input id="nik" name="nik" value="{{ old('nik') }}" maxlength="16" inputmode="numeric"
+                        autocomplete="off" class="form-control @error('nik') is-invalid @enderror" required>
+                    @error('nik')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-            {{-- =========================
-           NIK
-        ========================== --}}
-            <div class="form-group">
-                <label>NIK</label>
-                <input id="nik" name="nik" value="{{ old('nik') }}" class="form-control" maxlength="16"
-                    required>
-                @error('nik')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
+                <div class="col-12">
+                    <label class="form-label" for="nama">Nama</label>
+                    <input id="nama" name="nama" value="{{ old('nama') }}"
+                        class="form-control @error('nama') is-invalid @enderror" required>
+                    @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="tanggal_lahir">Tanggal Lahir</label>
+                    <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}"
+                        class="form-control @error('tanggal_lahir') is-invalid @enderror" required>
+                    @error('tanggal_lahir')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-            {{-- =========================
-           NAMA
-        ========================== --}}
-            <div class="form-group">
-                <label>Nama</label>
-                <input name="nama" value="{{ old('nama') }}" class="form-control" required>
-                @error('nama')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="tanggal_jadi">Tanggal Jadi Peserta</label>
+                    <input type="date" id="tanggal_jadi" name="tanggal_jadi" value="{{ old('tanggal_jadi') }}"
+                        class="form-control @error('tanggal_jadi') is-invalid @enderror" required>
+                    @error('tanggal_jadi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="tanggal_pensiun">Tanggal Pensiun</label>
+                    <input type="date" id="tanggal_pensiun" name="tanggal_pensiun" value="{{ old('tanggal_pensiun') }}"
+                        class="form-control @error('tanggal_pensiun') is-invalid @enderror" required>
+                    @error('tanggal_pensiun')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-            {{-- =========================
-           🔥 TANGGAL LAHIR (BARU)
-        ========================== --}}
-            <div class="form-group">
-                <label>Tanggal Lahir</label>
-                <div class="date-wrapper">
-                    <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="form-control"
-                        required>
-                    <span class="calendar-icon"><i class="fas fa-calendar-alt"></i></span>
+                <div class="col-12">
+                    <label class="form-label" for="phdp_display">PhDP</label>
+                    <div class="currency-wrapper">
+                        <span class="currency-prefix">Rp</span>
+                        <input type="text" id="phdp_display" inputmode="numeric" autocomplete="off"
+                            class="form-control currency-input @error('phdp') is-invalid @enderror" placeholder="0">
+                        <input type="hidden" name="phdp" id="phdp" value="{{ old('phdp') }}">
+                        @error('phdp')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <small class="text-muted">Format Rupiah otomatis</small>
                 </div>
             </div>
 
-
-            {{-- =========================
-           TANGGAL JADI PESERTA
-        ========================== --}}
-            <div class="form-group">
-                <label>Tanggal Jadi Peserta</label>
-                <div class="date-wrapper">
-                    <input type="date" name="tanggal_jadi" value="{{ old('tanggal_jadi') }}" class="form-control"
-                        required>
-                    <span class="calendar-icon"><i class="fas fa-calendar-alt"></i></span>
-                </div>
+            <div class="form-actions mt-4">
+                <a href="{{ route('admin.peserta.index') }}" class="btn btn-light border">Batal</a>
+                <button type="submit" class="btn btn-primary" id="btnSimpan">
+                    <i class="bi bi-check-lg"></i> Simpan
+                </button>
             </div>
-
-
-            {{-- =========================
-           🔥 TANGGAL PENSIUN (BARU)
-        ========================== --}}
-            <div class="form-group">
-                <label>Tanggal Pensiun</label>
-                <div class="date-wrapper">
-                    <input type="date" name="tanggal_pensiun" value="{{ old('tanggal_pensiun') }}" class="form-control"
-                        required>
-                    <span class="calendar-icon"><i class="fas fa-calendar-alt"></i></span>
-                </div>
-            </div>
-
-
-            {{-- =========================
-           PHDP
-        ========================== --}}
-            <div class="form-group">
-                <label>PhDP</label>
-                <div class="currency-wrapper">
-                    <span class="currency-prefix">Rp</span>
-                    <input type="text" id="phdp_display" class="form-control currency-input">
-                    <input type="hidden" name="phdp" id="phdp" value="{{ old('phdp') }}">
-                </div>
-                @error('phdp')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-
-
-            <button class="btn-primary" type="submit">
-                💾 Simpan
-            </button>
         </form>
     </div>
+@endsection
 
-
+@push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            /* ======================
-               NIK ONLY NUMBER
-            ====================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            // ===== NIK: hanya angka =====
             const nik = document.getElementById('nik');
             nik.addEventListener('input', () => {
                 nik.value = nik.value.replace(/\D/g, '').slice(0, 16);
             });
 
-
-            /* ======================
-               FORMAT RUPIAH PHDP
-            ====================== */
+            // ===== PhDP: format Rupiah =====
             const disp = document.getElementById('phdp_display');
             const hid = document.getElementById('phdp');
+            const rupiah = v => v.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-            const format = v => v.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            if (hid.value) disp.value = rupiah(String(hid.value).replace(/\D/g, ''));
 
-            if (hid.value) {
-                disp.value = format(hid.value);
-            }
-
-            disp.addEventListener('input', e => {
-                let val = e.target.value.replace(/\D/g, '');
+            disp.addEventListener('input', () => {
+                const val = disp.value.replace(/\D/g, '');
                 hid.value = val;
-                disp.value = val ? format(val) : '';
+                disp.value = val ? rupiah(val) : '';
             });
 
+            // ===== Cegah klik ganda =====
+            const form = document.getElementById('formPeserta');
+            const btn = document.getElementById('btnSimpan');
+            form.addEventListener('submit', () => {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Menyimpan...';
+            });
         });
     </script>
-@endsection
+@endpush

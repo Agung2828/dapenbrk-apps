@@ -29,9 +29,20 @@ class DashboardController extends Controller
             });
         }
 
+        $stats = [
+            'total'         => WbsLaporan::count(),
+            'diajukan'      => WbsLaporan::where('status', 'diajukan')->count(),
+            'diterima'      => WbsLaporan::where('status', 'diterima')->count(),
+            'dalam_antrian' => WbsLaporan::where('status', 'dalam_antrian')->count(),
+            'diproses'      => WbsLaporan::where('status', 'diproses')->count(),
+            'selesai'       => WbsLaporan::where('status', 'selesai')->count(),
+            'ditolak'       => WbsLaporan::where('status', 'ditolak')->count(),
+        ];
+
         return view('adminwbs.dashboard', [
             'laporans'   => $query->paginate(10)->withQueryString(),
             'statusList' => WbsOptions::statusList(),
+            'stats'      => $stats,
         ]);
     }
 

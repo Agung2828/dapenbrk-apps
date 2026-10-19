@@ -1,100 +1,220 @@
 @extends('layout.admin.index')
 
-@section('content')
-    <div class="container-fluid mt-4">
+@section('page-title', 'Tambah Berita')
 
-        <h4>Tambah Berita & Informasi</h4>
+@push('styles')
+    <style>
+        .form-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            animation: fadeUp .45s ease both;
+        }
+
+        .form-card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .form-card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 15px;
+        }
+
+        .form-card-no {
+            width: 30px;
+            height: 30px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            border-color: #e2e8f0;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+        }
+
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 576px) {
+            .form-card {
+                padding: 14px;
+            }
+
+            .action-bar {
+                flex-direction: column-reverse;
+                align-items: stretch;
+            }
+
+            .action-bar .btn {
+                width: 100%;
+            }
+
+            .action-bar .btn-group-end {
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 10px;
+                width: 100%;
+            }
+        }
+
+        .action-bar .btn-group-end {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+@endpush
+
+@section('content')
+    <div class="container-fluid p-0" style="max-width: 900px;">
 
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul class="mb-0 ps-3">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
 
         <form method="POST" action="{{ route('admin.berita.store') }}" enctype="multipart/form-data">
-
             @csrf
 
             <div id="formContainer">
 
-                {{-- ================= FORM BERITA ================= --}}
-                <div class="form-berita border p-3 mb-3 rounded position-relative">
-
-                    <button type="button" class="btn btn-sm btn-danger position-absolute"
-                        style="top:10px;right:10px;display:none" onclick="hapusForm(this)">
-                        ✕
-                    </button>
-
-                    <div class="form-group">
-                        <label>Kategori</label>
-                        <select name="kategori[]" class="form-control" required>
-                            <option value="">-- Pilih Kategori --</option>
-                            <option value="Pengumuman">Pengumuman</option>
-                            <option value="Kegiatan">Kegiatan</option>
-                            <option value="Penghargaan">Penghargaan</option>
-                        </select>
+                {{-- ===== FORM BERITA ===== --}}
+                <div class="form-card form-berita">
+                    <div class="form-card-head">
+                        <div class="form-card-title">
+                            <span class="form-card-no">1</span> Berita
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger btn-remove d-none"
+                            onclick="hapusForm(this)">
+                            <i class="bi bi-trash"></i> Hapus
+                        </button>
                     </div>
 
-                    <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="date" name="tanggal[]" class="form-control" required>
-                    </div>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Kategori</label>
+                            <select name="kategori[]" class="form-select" required>
+                                <option value="">-- Pilih Kategori --</option>
+                                <option value="Pengumuman">Pengumuman</option>
+                                <option value="Kegiatan">Kegiatan</option>
+                                <option value="Penghargaan">Penghargaan</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Foto (Opsional)</label>
-                        <input type="file" name="foto[]" class="form-control">
-                    </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Tanggal</label>
+                            <input type="date" name="tanggal[]" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Judul</label>
-                        <input type="text" name="judul[]" class="form-control" required>
-                    </div>
+                        <div class="col-12">
+                            <label class="form-label">Foto (Opsional)</label>
+                            <input type="file" name="foto[]" class="form-control" accept="image/*">
+                        </div>
 
-                    <div class="form-group">
-                        <label>Deskripsi</label>
-                        <textarea name="deskripsi[]" class="form-control" rows="4" required></textarea>
-                    </div>
+                        <div class="col-12">
+                            <label class="form-label">Judul</label>
+                            <input type="text" name="judul[]" class="form-control" required>
+                        </div>
 
+                        <div class="col-12">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea name="deskripsi[]" class="form-control" rows="4" required></textarea>
+                        </div>
+                    </div>
                 </div>
-                {{-- ================= END FORM ================= --}}
+                {{-- ===== END FORM ===== --}}
 
             </div>
 
-            <button type="button" class="btn btn-secondary mb-3" onclick="tambahForm()">
-                + Tambah Berita Lagi
+            <button type="button" class="btn btn-outline-secondary mb-4 w-100 w-sm-auto" onclick="tambahForm()">
+                <i class="bi bi-plus-lg"></i> Tambah Berita Lagi
             </button>
 
-            <div>
-                <a href="{{ route('admin.berita.index') }}" class="btn btn-light">
-                    Kembali
+            <div class="action-bar">
+                <a href="{{ route('admin.berita.index') }}" class="btn btn-light border">
+                    <i class="bi bi-arrow-left"></i> Kembali
                 </a>
-
-                <button class="btn btn-primary">
-                    Simpan Semua
-                </button>
+                <div class="btn-group-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Simpan Semua
+                    </button>
+                </div>
             </div>
 
         </form>
     </div>
+@endsection
 
+@push('scripts')
     <script>
+        const container = document.getElementById('formContainer');
+
+        function refreshForms() {
+            const forms = container.querySelectorAll('.form-berita');
+            forms.forEach((f, i) => {
+                f.querySelector('.form-card-no').textContent = i + 1;
+                // tombol hapus hanya muncul jika form lebih dari satu
+                f.querySelector('.btn-remove').classList.toggle('d-none', forms.length === 1);
+            });
+        }
+
         function tambahForm() {
-            const container = document.getElementById('formContainer');
-            const form = container.querySelector('.form-berita');
-            const clone = form.cloneNode(true);
+            const clone = container.querySelector('.form-berita').cloneNode(true);
 
             clone.querySelectorAll('input, textarea, select').forEach(el => el.value = '');
-            clone.querySelector('button').style.display = 'block';
-
             container.appendChild(clone);
+            refreshForms();
+            clone.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
         }
 
         function hapusForm(btn) {
             btn.closest('.form-berita').remove();
+            refreshForms();
         }
     </script>
-@endsection
+@endpush

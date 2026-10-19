@@ -1,50 +1,29 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('adminwbs.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Buat Laporan WBS - Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: #f5f7fa;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
+@section('page-title', 'Buat Laporan Manual')
 
-        .navbar-custom {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-        }
-    </style>
-</head>
+@section('content')
 
-<body>
-    <nav class="navbar navbar-custom navbar-dark px-4">
-        <a href="{{ route('adminwbs.dashboard') }}" class="navbar-brand"><i class="fas fa-arrow-left"></i> Admin WBS</a>
-    </nav>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <div class="container py-4">
-        <h4 class="mb-3">Buat Laporan WBS (oleh Admin)</h4>
+    <div class="bg-white rounded-4 shadow-sm p-4" style="max-width:900px;">
+        <h6 class="fw-bold mb-3" style="color:#1e3c72;"><i class="fas fa-square-plus"></i> Buat Laporan WBS (oleh Admin)</h6>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $e)
-                        <li>{{ $e }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('adminwbs.laporan.store') }}" enctype="multipart/form-data"
-            class="bg-white p-4 rounded shadow-sm">
+        <form method="POST" action="{{ route('adminwbs.laporan.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
                 <label class="form-label fw-bold">Status Anonimitas</label><br>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="is_anonim" value="1" id="anon1"
-                        checked>
+                    <input class="form-check-input" type="radio" name="is_anonim" value="1" id="anon1" checked>
                     <label class="form-check-label" for="anon1">Anonim</label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -111,29 +90,32 @@
         </form>
     </div>
 
+@endsection
+
+@push('scripts')
     <script>
         const JABATAN = @json($jabatanTerlapor);
         let idx = 0;
 
         function jabatanOptions() {
             return '<option value="">-- Pilih --</option>' + JABATAN.map(j => `<option value="${j}">${j}</option>`).join(
-                '');
+            '');
         }
 
         function addTerlapor() {
             const i = idx++;
             const html = `
-                <div class="border rounded p-3 mb-2" id="row-${i}">
-                    <div class="d-flex justify-content-between mb-2">
-                        <strong>Terlapor</strong>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="document.getElementById('row-${i}').remove()"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col-md-6"><input type="text" name="terlapor[${i}][nama_terlapor]" class="form-control" placeholder="Nama/Inisial Terlapor" required></div>
-                        <div class="col-md-6"><select name="terlapor[${i}][jabatan_terlapor]" class="form-select">${jabatanOptions()}</select></div>
-                        <div class="col-12"><textarea name="terlapor[${i}][info_tambahan_terlapor]" class="form-control" rows="2" placeholder="Info tambahan (opsional)"></textarea></div>
-                    </div>
-                </div>`;
+            <div class="border rounded p-3 mb-2" id="row-${i}">
+                <div class="d-flex justify-content-between mb-2">
+                    <strong>Terlapor</strong>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="document.getElementById('row-${i}').remove()"><i class="fas fa-trash"></i></button>
+                </div>
+                <div class="row g-2">
+                    <div class="col-md-6"><input type="text" name="terlapor[${i}][nama_terlapor]" class="form-control" placeholder="Nama/Inisial Terlapor" required></div>
+                    <div class="col-md-6"><select name="terlapor[${i}][jabatan_terlapor]" class="form-select">${jabatanOptions()}</select></div>
+                    <div class="col-12"><textarea name="terlapor[${i}][info_tambahan_terlapor]" class="form-control" rows="2" placeholder="Info tambahan (opsional)"></textarea></div>
+                </div>
+            </div>`;
             document.getElementById('terlaporList').insertAdjacentHTML('beforeend', html);
         }
 
@@ -143,10 +125,8 @@
         document.querySelectorAll('input[name="is_anonim"]').forEach(r => {
             r.addEventListener('change', () => {
                 document.getElementById('identitasFields').style.display = r.value === '0' ? 'flex' :
-                    'none';
+                'none';
             });
         });
     </script>
-</body>
-
-</html>
+@endpush

@@ -41,16 +41,6 @@ class WbsLaporan extends Model
         });
     }
 
-    public function terlapors(): HasMany
-    {
-        return $this->hasMany(WbsTerlapor::class, 'wbs_laporan_id');
-    }
-
-    public function bukti(): HasMany
-    {
-        return $this->hasMany(WbsBuktiLaporan::class, 'wbs_laporan_id');
-    }
-
     public static function generateUniqueToken(): string
     {
         do {
@@ -63,13 +53,39 @@ class WbsLaporan extends Model
     public static function statusLabel(string $status): string
     {
         return match ($status) {
-            'diajukan'      => 'Diajukan',
-            'diterima'      => 'Diterima',
+            'diajukan' => 'Diajukan',
+            'diterima' => 'Diterima',
             'dalam_antrian' => 'Dalam Antrian',
-            'diproses'      => 'Diproses',
-            'ditolak'       => 'Ditolak',
-            'selesai'       => 'Selesai',
-            default         => ucfirst($status),
+            'diproses' => 'Diproses',
+            'ditolak' => 'Ditolak',
+            'selesai' => 'Selesai',
+            default => ucfirst($status),
         };
+    }
+
+    /**
+     * Satu laporan bisa memiliki lebih dari satu pihak terlapor
+     * (mis. kasus kolusi/kerja sama antar-divisi atau pihak luar).
+     */
+    public function terlapors(): HasMany
+    {
+        return $this->hasMany(WbsTerlapor::class);
+    }
+
+    /**
+     * Satu laporan bisa memiliki lebih dari satu file bukti pendukung
+     * (PDF, Word, gambar, audio, atau video).
+     */
+    public function buktiPendukung(): HasMany
+    {
+        return $this->hasMany(WbsBuktiLaporan::class);
+    }
+
+    /**
+     * Alias agar kode lama yang memanggil $laporan->bukti tetap berfungsi.
+     */
+    public function bukti(): HasMany
+    {
+        return $this->buktiPendukung();
     }
 }
