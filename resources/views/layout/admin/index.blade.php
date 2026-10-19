@@ -506,13 +506,6 @@
 
         <header class="header-navbar">
             <div class="header-left">
-                {{-- Tombol kembali: hanya tampil di mobile & bukan di Dashboard --}}
-                @unless (request()->routeIs('dashboard'))
-                    <a href="{{ route('dashboard') }}" class="btn-header" id="btnBack" aria-label="Kembali">
-
-                    </a>
-                @endunless
-
                 <button type="button" class="btn-header" id="btnToggleSidebar" aria-label="Menu">
                     <i class="bi bi-list"></i>
                 </button>
